@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="iTutor" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ndj-ZE-pWP" customClass="FlatButton" customModule="Material">
+                                <rect key="frame" x="77" y="507" width="200" height="65"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="tutortapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="anZ-7V-ugL"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Urf-8R-d5A" customClass="FlatButton" customModule="Material">
+                                <rect key="frame" x="77" y="407" width="200" height="65"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="studenttapped:" destination="BYZ-38-t0r" eventType="valueChanged" id="Emz-co-rv4"/>
+                                </connections>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="iTutor Malaysia" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eij-n0-GzP">
+                                <rect key="frame" x="77" y="17" width="200" height="65"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLightItalic" family="Helvetica Neue" pointSize="20"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Urf-8R-d5A" firstAttribute="top" secondItem="Eij-n0-GzP" secondAttribute="bottom" constant="325" id="b03-eM-svo"/>
+                            <constraint firstItem="Ndj-ZE-pWP" firstAttribute="top" secondItem="Urf-8R-d5A" secondAttribute="bottom" constant="35" id="j2Z-K6-oG7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="studentbutton" destination="Urf-8R-d5A" id="VCa-7M-IEN"/>
+                        <outlet property="tutorbutton" destination="Ndj-ZE-pWP" id="61z-qr-XOl"/>
+                        <segue destination="1EW-7E-Vay" kind="presentation" identifier="Tutor" id="8c1-Lg-DU0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="305" y="364"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="tNL-sh-xTr">
+            <objects>
+                <viewController id="jXH-MW-sRF" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="57d-ot-jfj"/>
+                        <viewControllerLayoutGuide type="bottom" id="8vH-Tr-QWS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LZS-TJ-SnP">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C3j-yv-VOv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1063" y="364"/>
+        </scene>
+        <!--Tutor Login-->
+        <scene sceneID="Xqq-8W-q37">
+            <objects>
+                <viewController storyboardIdentifier="TutorLoginViewController" id="FE2-Ap-kYE" customClass="TutorLogInViewController" customModule="iTutor" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wnj-Wh-JnB"/>
+                        <viewControllerLayoutGuide type="bottom" id="NCo-rN-iMh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fFb-hh-Rrm">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bda-qn-BH4" customClass="TextField" customModule="Material">
+                                <rect key="frame" x="50" y="100" width="300" height="24"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W8d-5I-sUD" customClass="TextField" customModule="Material">
+                                <rect key="frame" x="50" y="150" width="300" height="24"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pmb-Lf-3L6" customClass="RaisedButton" customModule="Material">
+                                <rect key="frame" x="100" y="220" width="200" height="65"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="loginButton:" destination="FE2-Ap-kYE" eventType="touchUpInside" id="Do6-eg-S1h"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UH2-P6-mta" customClass="FlatButton" customModule="Material">
+                                <rect key="frame" x="100" y="290" width="200" height="65"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oGr-Vy-Kru" customClass="FlatButton" customModule="Material">
+                                <rect key="frame" x="100" y="375" width="200" height="65"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="signupButton:" destination="FE2-Ap-kYE" eventType="touchUpInside" id="J3F-LR-duq"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Pmb-Lf-3L6" firstAttribute="top" secondItem="W8d-5I-sUD" secondAttribute="bottom" constant="46" id="81t-bY-62C"/>
+                            <constraint firstItem="oGr-Vy-Kru" firstAttribute="top" secondItem="UH2-P6-mta" secondAttribute="bottom" constant="20" id="jB4-FK-dqC"/>
+                            <constraint firstItem="W8d-5I-sUD" firstAttribute="top" secondItem="Bda-qn-BH4" secondAttribute="bottom" constant="26" id="mvu-4G-yss"/>
+                            <constraint firstItem="UH2-P6-mta" firstAttribute="top" secondItem="Pmb-Lf-3L6" secondAttribute="bottom" constant="5" id="rbp-i9-3Rp"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Tutor Login" id="lMQ-ih-CJO"/>
+                    <connections>
+                        <outlet property="emailtextfield" destination="Bda-qn-BH4" id="OTP-9R-eMA"/>
+                        <outlet property="forgotyourpassword" destination="UH2-P6-mta" id="8pP-9z-J4J"/>
+                        <outlet property="loginbutton" destination="Pmb-Lf-3L6" id="HXA-Ru-Nnb"/>
+                        <outlet property="passwordtextfield" destination="W8d-5I-sUD" id="08p-yI-XgQ"/>
+                        <outlet property="signupbutton" destination="oGr-Vy-Kru" id="Pem-bZ-xnq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0I8-Aa-gwJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1092" y="1197"/>
+        </scene>
+        <!--Sign Up Tutor-->
+        <scene sceneID="dxz-mX-8US">
+            <objects>
+                <viewController storyboardIdentifier="TutorSignUp" id="EMp-7z-b8M" customClass="SignUpViewController" customModule="iTutor" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uXP-MC-fME"/>
+                        <viewControllerLayoutGuide type="bottom" id="qFN-Qd-mj6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Clu-GO-uq1">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aBP-TI-7eN">
+                                <rect key="frame" x="0.0" y="-64" width="600" height="664"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="aBP-TI-7eN" secondAttribute="trailing" id="0iv-ub-s1N"/>
+                            <constraint firstItem="aBP-TI-7eN" firstAttribute="bottom" secondItem="qFN-Qd-mj6" secondAttribute="top" id="nao-3x-986"/>
+                            <constraint firstItem="aBP-TI-7eN" firstAttribute="leading" secondItem="Clu-GO-uq1" secondAttribute="leading" id="ov3-A2-gTA"/>
+                            <constraint firstItem="aBP-TI-7eN" firstAttribute="top" secondItem="Clu-GO-uq1" secondAttribute="top" constant="-64" id="xHl-Tu-2NW"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Sign Up Tutor" id="Kxy-cV-z3z"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bZH-ka-gbh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3463" y="1197"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="GNb-fa-MaA">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1EW-7E-Vay" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3FN-U8-0bf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="FE2-Ap-kYE" kind="relationship" relationship="rootViewController" id="9Va-2y-Jqo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tT8-yu-TE3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="430" y="1197"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3W0-If-UbV">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0q6-1S-9RE" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3s4-ng-2uH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="EMp-7z-b8M" kind="relationship" relationship="rootViewController" id="KjG-Ak-9uv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1x4-h8-jMB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2651" y="1197"/>
+        </scene>
+    </scenes>
+</document>
