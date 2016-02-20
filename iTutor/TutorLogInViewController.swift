@@ -101,7 +101,8 @@ class TutorLogInViewController: UIViewController {
     @IBAction func signupButton(sender: AnyObject)
     {
         let vc = storyboard!.instantiateViewControllerWithIdentifier("TutorSignUp") as! SignUpViewController
-        self.presentViewController(vc, animated: true, completion: nil)
+        let navigationController = UINavigationController(rootViewController: vc)
+        self.presentViewController(navigationController, animated: true, completion: nil)
     }
     /*
     // MARK: - Navigation

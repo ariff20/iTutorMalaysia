@@ -8,41 +8,38 @@
 
 import UIKit
 import Eureka
-class SignUpViewController: FormViewController ,UINavigationBarDelegate{
-
-   
+import Parse
+class SignUpViewController: FormViewController
+{
+    let username:String? = nil
+    let password:String? = nil
+    var tutorobject = PFObject(className: "User")
     override func viewDidLoad() {
         super.viewDidLoad()
-       /* let navigationBar = UINavigationBar(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height))
-        navigationBar.backgroundColor = UIColor.whiteColor()
-        navigationBar.delegate = self;
-        navigationBar.sizeToFit()
-        
-        // Create a navigation item with a title
-        let navigationItem = UINavigationItem()
-        navigationItem.title = "Sign Up Tutor"*/
-
-         let logButton : UIBarButtonItem = UIBarButtonItem(title: "RightButtonTitle", style: UIBarButtonItemStyle.Done, target: self, action: "multipleSelectorDone")
        
-        self.navigationController?.navigationBar.hidden = false
+       
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .Done, target: self, action: "doneTapped:")
         
-        self.navigationItem.rightBarButtonItem = logButton
-       // navigationBar.items = [navigationItem]
-       // self.view.addSubview(navigationBar)
          form +++ Section("Your Basic Details")
-            <<< NameRow()
+            <<< NameRow("name")
                 {
                     $0.placeholder = "Your Name"
+                    
                 }
-            <<< EmailRow()
+            
+            <<< EmailRow("Emaillol")
                 {
+                    
                     $0.placeholder = "Email"
+        
                 }
-            <<< PasswordRow()
+            
+        
+            <<< PasswordRow("Passwordlol")
                 {
                     $0.placeholder = "Password"
                 }
-            <<< PhoneRow()
+            <<< PhoneRow("phone")
                 {
                     $0.placeholder = "Your phone no,Customers will see this"
                 }
@@ -50,6 +47,7 @@ class SignUpViewController: FormViewController ,UINavigationBarDelegate{
             +++ Section("Select your Expertise")
             <<< MultipleSelectorRow<String>
                 {
+                    $0.tag = "Subjects"
                     $0.title = "Choose your Subjects"
                     $0.options = ["English","Mandarin","Maths","Science","Bahasa Malaysia"]
                     
@@ -59,20 +57,26 @@ class SignUpViewController: FormViewController ,UINavigationBarDelegate{
             }
             <<< MultipleSelectorRow<String>
                 {
+                    $0.tag = "Levels"
                     $0.title = "Choose your levels"
                     $0.options = ["Standard 1-3","Standard 4-6","Form 1-3","Form 4-5"]
                     
                 }
                 .onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = logButton}
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: "multipleSelectorDone:")}
         
-            <<< MultipleSelectorRow<String>
-                {
-                    $0.title = "Choose your pricing range"
-                    $0.options = ["RM30-RM40","RM40-RM60","RM60-RM80","RM80-RM100"]
+            
+            <<< AlertRow<String>() {
+                $0.tag = "Price"
+                $0.title = "Pricing Range"
+                $0.selectorTitle = "Choose"
+                $0.options = ["RM10-20", "RM20-30", "RM30-40", "RM40-50", "RM50-60", "RM60-70"]
+                }.onChange { row in
+                    print(row.value)
                 }
-                .onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = logButton}
+                .onPresent{ _, to in
+                    to.view.tintColor = .purpleColor()
+            }
             +++ Section("Where can you teach?")
             <<< TextRow()
                 {
@@ -82,8 +86,7 @@ class SignUpViewController: FormViewController ,UINavigationBarDelegate{
                 {
                     $0.placeholder = "Town,ex:Near Shah Alam"
                 }
-        
-        
+
         }
     override func viewWillAppear(animated: Bool)
     {
@@ -91,19 +94,62 @@ class SignUpViewController: FormViewController ,UINavigationBarDelegate{
         self.navigationController?.navigationBarHidden=false
         
     }
-    
+
     func multipleSelectorDone(item:UIBarButtonItem)
     {
-        print("YOLO")
+        
         navigationController?.popViewControllerAnimated(true)
-       //navigationController?.popToRootViewControllerAnimated(true)
     }
     
         // Do any additional setup after loading the view.
-    }
 
-
+func doneTapped(item:UIBarButtonItem)
+{
+    let user = PFUser()
     
+    user.username = form.rowByTag("Emaillol")?.baseValue as! String
+    user.password = form.rowByTag("Passwordlol")?.baseValue as! String
+    user["Name"] = form.rowByTag("name")?.baseValue as! AnyObject
+    user["PhoneNo"] = form.rowByTag("phone")?.baseValue as! AnyObject
+    print(form.rowByTag("Subjects")?.baseValue)
+    if let subjects = form.rowByTag("Subjects")?.baseValue
+    {
+        let arr = subjects.flatMap { $0 }
+        user["Subjects"] = arr as! AnyObject
+    }
+    else
+    {
+        print("There is no subjects chosen")
+    }
+    
+    
+   
+ 
+    
+    
+    
+    user.signUpInBackgroundWithBlock({ (succeed, error) -> Void in
+        
+        // Stop the spinner
+        //spinner.stopAnimating()
+        if ((error) != nil) {
+            var alert = UIAlertView(title: "Error", message: "\(error)", delegate: self, cancelButtonTitle: "OK")
+            alert.show()
+            
+        } else {
+            var alert = UIAlertView(title: "Success", message: "Signed Up", delegate: self, cancelButtonTitle: "OK")
+            alert.show()
+        }
+    })
+    
+
+   
+
+    }
+}
+
+
+
 
     /*
     // MARK: - Navigation
