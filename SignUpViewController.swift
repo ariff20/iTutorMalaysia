@@ -13,12 +13,12 @@ class SignUpViewController: FormViewController
 {
     let username:String? = nil
     let password:String? = nil
-    var tutorobject = PFObject(className: "User")
+
     override func viewDidLoad() {
         super.viewDidLoad()
        
        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .Done, target: self, action: "doneTapped:")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .Done, target: self, action: #selector(doneTapped))
         
          form +++ Section("Your Basic Details")
             <<< NameRow("name")
@@ -43,6 +43,28 @@ class SignUpViewController: FormViewController
                 {
                     $0.placeholder = "Your phone no,Customers will see this"
                 }
+            <<< AlertRow<String>()
+                {
+                    $0.tag = "Gender"
+                    $0.title = "Your Gender"
+                    $0.selectorTitle = "Choose"
+                    $0.options = ["Male","Female"]
+            }.onChange { row in
+                    print(row.value)
+                }
+                .onPresent{ _, to in
+                    to.view.tintColor = .purpleColor()
+            }
+            <<< TextRow()
+                {
+                    $0.tag = "Desc"
+                    $0.placeholder = "Description"
+                 }
+            <<< ImageRow()
+                {
+                    $0.tag = "Image"
+                    $0.title = "Choose your profile pic"
+                }
             
             +++ Section("Select your Expertise")
             <<< MultipleSelectorRow<String>
@@ -53,7 +75,7 @@ class SignUpViewController: FormViewController
                     
                 }
                 .onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: "multipleSelectorDone:")
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(self.multipleSelectorDone))
             }
             <<< MultipleSelectorRow<String>
                 {
@@ -63,7 +85,7 @@ class SignUpViewController: FormViewController
                     
                 }
                 .onPresent { from, to in
-                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: "multipleSelectorDone:")}
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(self.multipleSelectorDone))}
         
             
             <<< AlertRow<String>() {
@@ -77,15 +99,33 @@ class SignUpViewController: FormViewController
                 .onPresent{ _, to in
                     to.view.tintColor = .purpleColor()
             }
-            +++ Section("Where can you teach?")
+            +++ Section("Where and when can you teach?")
+            <<< AlertRow<String>()
+                {
+                    $0.tag = "State"
+                    $0.title = "State"
+                    $0.selectorTitle = "Choose"
+                    $0.options = ["Selangor","Kelantan","Terengganu","Sabah","Sarawak","Johor","Pahang","Kedah","Perlis","Wilayah","Pulau Pinang","Labuan","Putrajaya"]
+                }.onChange { row in
+                    print(row.value)
+                }
+                .onPresent{ _, to in
+                    to.view.tintColor = .purpleColor()
+            }
             <<< TextRow()
                 {
-                    $0.placeholder = "State"
+                    $0.tag = "Town"
+                    $0.placeholder = "Town,ex:Shah Alam,Petaling Jaya"
                 }
-            <<< TextRow()
+            <<< MultipleSelectorRow<String>
                 {
-                    $0.placeholder = "Town,ex:Near Shah Alam"
+                    $0.tag = "Day"
+                    $0.title = "Choose your available days"
+                    $0.options = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+                    
                 }
+                .onPresent { from, to in
+                    to.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: from, action: #selector(self.multipleSelectorDone))}
 
         }
     override func viewWillAppear(animated: Bool)
@@ -95,7 +135,7 @@ class SignUpViewController: FormViewController
         
     }
 
-    func multipleSelectorDone(item:UIBarButtonItem)
+    func multipleSelectorDone()
     {
         
         navigationController?.popViewControllerAnimated(true)
@@ -103,23 +143,46 @@ class SignUpViewController: FormViewController
     
         // Do any additional setup after loading the view.
 
-func doneTapped(item:UIBarButtonItem)
+func doneTapped()
 {
-    let user = PFUser()
+     let user = PFUser()
     
-    user.username = form.rowByTag("Emaillol")?.baseValue as! String
-    user.password = form.rowByTag("Passwordlol")?.baseValue as! String
-    user["Name"] = form.rowByTag("name")?.baseValue as! AnyObject
-    user["PhoneNo"] = form.rowByTag("phone")?.baseValue as! AnyObject
-    print(form.rowByTag("Subjects")?.baseValue)
-    if let subjects = form.rowByTag("Subjects")?.baseValue
+    user.username = form.rowByTag("Emaillol")?.baseValue as? String
+    user.password = form.rowByTag("Passwordlol")?.baseValue as? String
+    user["Name"] = form.rowByTag("name")?.baseValue as? AnyObject
+    user["PhoneNo"] = form.rowByTag("phone")?.baseValue as? AnyObject
+    user["Gender"] = form.rowByTag("Gender")?.baseValue as? AnyObject
+    user["PricingRange"] = form.rowByTag("Price")?.baseValue as? AnyObject
+    user["Desc"] = form.rowByTag("Desc")?.baseValue as? AnyObject
+    let image = form.rowByTag("Image")?.baseValue as? UIImage
+    let imageData: NSData = UIImageJPEGRepresentation(image!, 1.0)!
+    let profphoto = PFFile(name: "profile_photo", data: imageData)
+    user["ProfPhoto"] = profphoto
+    user["State"] = form.rowByTag("State")?.baseValue as? AnyObject
+    user["Town"] = form.rowByTag("Town")?.baseValue as? AnyObject
+    if let days = form.rowByTag("Day")?.baseValue as? Set<String>
     {
-        let arr = subjects.flatMap { $0 }
-        user["Subjects"] = arr as! AnyObject
+        let day = days.flatMap { $0 }
+        user["Days"] = day as AnyObject
+    }
+    if let subjects = form.rowByTag("Subjects")?.baseValue as? Set<String>
+    {
+        let sub = subjects.flatMap { $0 }
+        user["Subjects"] = sub as AnyObject
+        
     }
     else
     {
-        print("There is no subjects chosen")
+        print("Error,There is no subjects chosen")
+    }
+    if let levels = form.rowByTag("Levels")?.baseValue as? Set<String>
+    {
+        let lev = levels.flatMap{ $0 }
+        user["Levels"] = lev as AnyObject
+    }
+    else
+    {
+        print("Error,There no levels chosen")
     }
     
     
@@ -133,12 +196,15 @@ func doneTapped(item:UIBarButtonItem)
         // Stop the spinner
         //spinner.stopAnimating()
         if ((error) != nil) {
-            var alert = UIAlertView(title: "Error", message: "\(error)", delegate: self, cancelButtonTitle: "OK")
-            alert.show()
+            let alertz = UIAlertController(title: "Oops!", message:"\(error)", preferredStyle: .Alert)
+            alertz.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
+            self.presentViewController(alertz, animated: true){}
             
         } else {
-            var alert = UIAlertView(title: "Success", message: "Signed Up", delegate: self, cancelButtonTitle: "OK")
-            alert.show()
+            let alert = UIAlertController(title: "Yay!", message:"Signed Up", preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in
+                self.dismissViewControllerAnimated(true, completion: nil)})
+            self.presentViewController(alert, animated: true){}
         }
     })
     

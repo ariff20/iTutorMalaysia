@@ -7,9 +7,15 @@
 //
 
 import UIKit
+import Material
+class TutorTableViewCell: MaterialTableViewCell
+{
 
-class TutorTableViewCell: UITableViewCell {
-
+    @IBOutlet var tutorlocation: UILabel!
+    @IBOutlet var tutorPriceRange: UILabel!
+    @IBOutlet var tutorDesc: UILabel!
+    @IBOutlet var tutorName: UILabel!
+    @IBOutlet var tutorimage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
