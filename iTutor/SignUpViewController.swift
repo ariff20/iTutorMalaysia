@@ -22,7 +22,8 @@ class SignUpViewController: FormViewController
          navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: #selector(cancelTapped))
         
          form +++ Section("Your Basic Details")
-            <<< NameRow("name")
+            
+           <<< NameRow("name")
                 {
                     $0.placeholder = "Your Name"
                     
@@ -281,6 +282,10 @@ func doneTapped()
         let day = days.flatMap { $0 }
         user["Days"] = day as AnyObject
     }
+    else
+    {
+        self.showAlert("Error!", message: "Please enter your days!")
+    }
     if let subjects = form.rowByTag("Subjects")?.baseValue as? Set<String>
     {
         let sub = subjects.flatMap { $0 }
@@ -289,7 +294,7 @@ func doneTapped()
     }
     else
     {
-        print("Error,There is no subjects chosen")
+        self.showAlert("Error!", message: "Please enter your subject!")
     }
     if let levels = form.rowByTag("Levels")?.baseValue as? Set<String>
     {
@@ -298,19 +303,28 @@ func doneTapped()
     }
     else
     {
-        print("Error,There no levels chosen")
+        self.showAlert("Error!", message: "Please enter your level!")
     }
-    user.signUpInBackgroundWithBlock({ (succeed, error) -> Void in
-        
-        
-        if ((error) != nil) {
-            self.showAlert("Oops", message: error?.localizedDescription)
-            
-        } else {
-            self.showAlert("Yay", message: "Signed Up!")
-            
+    
+    if(form.rowByTag("Emaillol")?.baseValue != nil && form.rowByTag("Passwordlol")?.baseValue != nil && form.rowByTag("name")?.baseValue != nil && form.rowByTag("phone")?.baseValue != nil && form.rowByTag("Gender")?.baseValue != nil && form.rowByTag("Price")?.baseValue != nil &&  form.rowByTag("State")?.baseValue != nil && form.rowByTag("Town")?.baseValue != nil && form.rowByTag("Day")?.baseValue != nil && form.rowByTag("Subjects")?.baseValue != nil && form.rowByTag("Levels")?.baseValue != nil)
+        {
+            user.signUpInBackgroundWithBlock({ (succeed, error) -> Void in
+                
+                
+                if ((error) != nil) {
+                    self.showAlert("Oops", message: error?.localizedDescription)
+                    
+                } else {
+                    let alertz = UIAlertController(title: "Yay", message: "Signed Up!", preferredStyle: .Alert)
+                    alertz.addAction(UIAlertAction(title: "OK", style: .Default) { _ in
+                        self.dismissViewControllerAnimated(true, completion: nil)})
+                    self.presentViewController(alertz, animated: true){}
+                    
+                }
+            })
         }
-    })
+    
+  
        
 
     }

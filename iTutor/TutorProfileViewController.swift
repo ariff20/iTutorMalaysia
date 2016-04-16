@@ -84,14 +84,15 @@ class TutorProfileViewController: UIViewController,MFMailComposeViewControllerDe
                                 self.tuttown.text = tutorobject?.valueForKey("Town") as? String
                                 self.tutstate.text = tutorobject?.valueForKey("State") as? String
                                 self.tutgender.text = tutorobject?.valueForKey("Gender") as? String
-                                self.tutdesc.text = tutorobject?.valueForKey("Desc") as? String
+                                if let desc = tutorobject?.valueForKey("Desc") as? String
+                                {
+                                  self.tutdesc.text = desc
+                                }
                                 self.tutor = tutorobject
                                 if let ratingzz = tutorobject?.valueForKey("Rating") as? Double
                                 {
                                     self.rating.rating = ratingzz
                                 }
-                                
-                                
                                 
                                 
                                 if let tutorPic = tutorobject?.valueForKey("ProfPhoto") as! PFFile!

@@ -281,10 +281,14 @@ class BestTutorsViewController: UIViewController,UITableViewDataSource,UITableVi
                           tutordetail.objectid = tutore.objectId
                         break
                     case 1:
-                        if(self.indexpath?.row < tutorbystateObjects.count)
+                        if(index < tutorbystateObjects.count)
                         {
                             let tutor = tutorbystateObjects[index]
                             tutordetail.objectid = tutor.objectId
+                        }
+                        else
+                        {
+                            print("array out of index")
                         }
                         
                         break
