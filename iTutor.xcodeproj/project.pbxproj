@@ -1,0 +1,752 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		22545B671CAD7F8C00F6A143 /* CheckInternet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22545B661CAD7F8C00F6A143 /* CheckInternet.swift */; };
+		22545B691CAD7FAC00F6A143 /* PersistedPFObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22545B681CAD7FAC00F6A143 /* PersistedPFObject.swift */; };
+		22545B6B1CAD7FC400F6A143 /* TutorEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22545B6A1CAD7FC400F6A143 /* TutorEditViewController.swift */; };
+		22545B6D1CAD7FE000F6A143 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22545B6C1CAD7FE000F6A143 /* SignUpViewController.swift */; };
+		22545B6F1CAD7FED00F6A143 /* TutorFavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22545B6E1CAD7FED00F6A143 /* TutorFavoritesViewController.swift */; };
+		22545B731CAD805A00F6A143 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22545B721CAD805A00F6A143 /* Parse.framework */; };
+		22545B751CAD806200F6A143 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22545B741CAD806200F6A143 /* Bolts.framework */; };
+		22545B771CAD808D00F6A143 /* TutorFavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22545B761CAD808D00F6A143 /* TutorFavoriteTableViewCell.swift */; };
+		22545B7F1CAEB7BE00F6A143 /* ForgotYourPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22545B7E1CAEB7BE00F6A143 /* ForgotYourPasswordViewController.swift */; };
+		22545B811CB1617E00F6A143 /* BestTutorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22545B801CB1617E00F6A143 /* BestTutorsViewController.swift */; };
+		22545B851CB8FB8200F6A143 /* BestTutorsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22545B841CB8FB8200F6A143 /* BestTutorsTableViewCell.swift */; };
+		226F22CB1C6A422C001F5D9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F22CA1C6A422C001F5D9B /* AppDelegate.swift */; };
+		226F22CD1C6A422C001F5D9B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F22CC1C6A422C001F5D9B /* ViewController.swift */; };
+		226F22D01C6A422C001F5D9B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 226F22CE1C6A422C001F5D9B /* Main.storyboard */; };
+		226F22D31C6A422C001F5D9B /* iTutor.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 226F22D11C6A422C001F5D9B /* iTutor.xcdatamodeld */; };
+		226F22D51C6A422C001F5D9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 226F22D41C6A422C001F5D9B /* Assets.xcassets */; };
+		226F22D81C6A422C001F5D9B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 226F22D61C6A422C001F5D9B /* LaunchScreen.storyboard */; };
+		226F22E31C6A422C001F5D9B /* iTutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F22E21C6A422C001F5D9B /* iTutorTests.swift */; };
+		226F22EE1C6A422C001F5D9B /* iTutorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F22ED1C6A422C001F5D9B /* iTutorUITests.swift */; };
+		226F23001C6A5853001F5D9B /* TutorLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226F22FF1C6A5853001F5D9B /* TutorLogInViewController.swift */; };
+		226F23061C6A58F8001F5D9B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226F23051C6A58F8001F5D9B /* AudioToolbox.framework */; };
+		226F23081C6A58FD001F5D9B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226F23071C6A58FD001F5D9B /* CFNetwork.framework */; };
+		226F230A1C6A590B001F5D9B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226F23091C6A590B001F5D9B /* CoreGraphics.framework */; };
+		226F230C1C6A5911001F5D9B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226F230B1C6A5911001F5D9B /* CoreLocation.framework */; };
+		226F230E1C6A5917001F5D9B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226F230D1C6A5917001F5D9B /* QuartzCore.framework */; };
+		226F23101C6A5922001F5D9B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226F230F1C6A5922001F5D9B /* Security.framework */; };
+		226F23121C6A5927001F5D9B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226F23111C6A5927001F5D9B /* StoreKit.framework */; };
+		226F23141C6A592E001F5D9B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226F23131C6A592E001F5D9B /* SystemConfiguration.framework */; };
+		226F23161C6A5937001F5D9B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 226F23151C6A5937001F5D9B /* libz.tbd */; };
+		226F23181C6A5944001F5D9B /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 226F23171C6A5944001F5D9B /* libsqlite3.tbd */; };
+		2295013B1C899E64006C6707 /* StudentQueryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2295013A1C899E64006C6707 /* StudentQueryViewController.swift */; };
+		2295013D1C8C6561006C6707 /* TutorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2295013C1C8C6561006C6707 /* TutorTableViewController.swift */; };
+		2295013F1C8EDFC8006C6707 /* TutorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2295013E1C8EDFC8006C6707 /* TutorTableViewCell.swift */; };
+		229501411C92C7F2006C6707 /* TutorProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229501401C92C7F2006C6707 /* TutorProfileViewController.swift */; };
+		774A5D8CE26991DA7FF58260 /* Pods_iTutor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA8AD140FB816B2170CC448B /* Pods_iTutor.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		226F22DF1C6A422C001F5D9B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 226F22BF1C6A422C001F5D9B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 226F22C61C6A422C001F5D9B;
+			remoteInfo = iTutor;
+		};
+		226F22EA1C6A422C001F5D9B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 226F22BF1C6A422C001F5D9B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 226F22C61C6A422C001F5D9B;
+			remoteInfo = iTutor;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0B7576EF396B5125CF764CCD /* Pods-iTutor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTutor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iTutor/Pods-iTutor.debug.xcconfig"; sourceTree = "<group>"; };
+		22545B4C1CAD653400F6A143 /* iTutor-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "iTutor-Bridging-Header.h"; sourceTree = "<group>"; };
+		22545B661CAD7F8C00F6A143 /* CheckInternet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInternet.swift; sourceTree = "<group>"; };
+		22545B681CAD7FAC00F6A143 /* PersistedPFObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistedPFObject.swift; sourceTree = "<group>"; };
+		22545B6A1CAD7FC400F6A143 /* TutorEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorEditViewController.swift; sourceTree = "<group>"; };
+		22545B6C1CAD7FE000F6A143 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		22545B6E1CAD7FED00F6A143 /* TutorFavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorFavoritesViewController.swift; sourceTree = "<group>"; };
+		22545B721CAD805A00F6A143 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		22545B741CAD806200F6A143 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		22545B761CAD808D00F6A143 /* TutorFavoriteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorFavoriteTableViewCell.swift; sourceTree = "<group>"; };
+		22545B7E1CAEB7BE00F6A143 /* ForgotYourPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotYourPasswordViewController.swift; sourceTree = "<group>"; };
+		22545B801CB1617E00F6A143 /* BestTutorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestTutorsViewController.swift; sourceTree = "<group>"; };
+		22545B841CB8FB8200F6A143 /* BestTutorsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestTutorsTableViewCell.swift; sourceTree = "<group>"; };
+		226F22C71C6A422C001F5D9B /* iTutor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTutor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		226F22CA1C6A422C001F5D9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		226F22CC1C6A422C001F5D9B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		226F22CF1C6A422C001F5D9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		226F22D21C6A422C001F5D9B /* iTutor.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iTutor.xcdatamodel; sourceTree = "<group>"; };
+		226F22D41C6A422C001F5D9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		226F22D71C6A422C001F5D9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		226F22D91C6A422C001F5D9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		226F22DE1C6A422C001F5D9B /* iTutorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iTutorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		226F22E21C6A422C001F5D9B /* iTutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTutorTests.swift; sourceTree = "<group>"; };
+		226F22E41C6A422C001F5D9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		226F22E91C6A422C001F5D9B /* iTutorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iTutorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		226F22ED1C6A422C001F5D9B /* iTutorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTutorUITests.swift; sourceTree = "<group>"; };
+		226F22EF1C6A422C001F5D9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		226F22FF1C6A5853001F5D9B /* TutorLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorLogInViewController.swift; sourceTree = "<group>"; };
+		226F23051C6A58F8001F5D9B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		226F23071C6A58FD001F5D9B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		226F23091C6A590B001F5D9B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		226F230B1C6A5911001F5D9B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		226F230D1C6A5917001F5D9B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		226F230F1C6A5922001F5D9B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		226F23111C6A5927001F5D9B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		226F23131C6A592E001F5D9B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		226F23151C6A5937001F5D9B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		226F23171C6A5944001F5D9B /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		2295013A1C899E64006C6707 /* StudentQueryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentQueryViewController.swift; sourceTree = "<group>"; };
+		2295013C1C8C6561006C6707 /* TutorTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorTableViewController.swift; sourceTree = "<group>"; };
+		2295013E1C8EDFC8006C6707 /* TutorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorTableViewCell.swift; sourceTree = "<group>"; };
+		229501401C92C7F2006C6707 /* TutorProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorProfileViewController.swift; sourceTree = "<group>"; };
+		EA8AD140FB816B2170CC448B /* Pods_iTutor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iTutor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA6FBB56B1A3D347C76F56B5 /* Pods-iTutor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTutor.release.xcconfig"; path = "Pods/Target Support Files/Pods-iTutor/Pods-iTutor.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		226F22C41C6A422C001F5D9B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				226F23181C6A5944001F5D9B /* libsqlite3.tbd in Frameworks */,
+				226F23161C6A5937001F5D9B /* libz.tbd in Frameworks */,
+				226F23141C6A592E001F5D9B /* SystemConfiguration.framework in Frameworks */,
+				226F23121C6A5927001F5D9B /* StoreKit.framework in Frameworks */,
+				226F23101C6A5922001F5D9B /* Security.framework in Frameworks */,
+				226F230E1C6A5917001F5D9B /* QuartzCore.framework in Frameworks */,
+				226F230C1C6A5911001F5D9B /* CoreLocation.framework in Frameworks */,
+				22545B751CAD806200F6A143 /* Bolts.framework in Frameworks */,
+				226F230A1C6A590B001F5D9B /* CoreGraphics.framework in Frameworks */,
+				226F23081C6A58FD001F5D9B /* CFNetwork.framework in Frameworks */,
+				226F23061C6A58F8001F5D9B /* AudioToolbox.framework in Frameworks */,
+				22545B731CAD805A00F6A143 /* Parse.framework in Frameworks */,
+				774A5D8CE26991DA7FF58260 /* Pods_iTutor.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		226F22DB1C6A422C001F5D9B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		226F22E61C6A422C001F5D9B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0B95E5B9EADA2E8E7B4F81A0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				226F23171C6A5944001F5D9B /* libsqlite3.tbd */,
+				226F23151C6A5937001F5D9B /* libz.tbd */,
+				226F23131C6A592E001F5D9B /* SystemConfiguration.framework */,
+				226F23111C6A5927001F5D9B /* StoreKit.framework */,
+				226F230F1C6A5922001F5D9B /* Security.framework */,
+				226F230D1C6A5917001F5D9B /* QuartzCore.framework */,
+				226F230B1C6A5911001F5D9B /* CoreLocation.framework */,
+				226F23091C6A590B001F5D9B /* CoreGraphics.framework */,
+				226F23071C6A58FD001F5D9B /* CFNetwork.framework */,
+				226F23051C6A58F8001F5D9B /* AudioToolbox.framework */,
+				EA8AD140FB816B2170CC448B /* Pods_iTutor.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		22545B531CAD6C2800F6A143 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				22545B681CAD7FAC00F6A143 /* PersistedPFObject.swift */,
+				22545B661CAD7F8C00F6A143 /* CheckInternet.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		22545B541CAD6C3300F6A143 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				226F22CE1C6A422C001F5D9B /* Main.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		22545B551CAD6C3700F6A143 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				22545B761CAD808D00F6A143 /* TutorFavoriteTableViewCell.swift */,
+				22545B6E1CAD7FED00F6A143 /* TutorFavoritesViewController.swift */,
+				22545B6C1CAD7FE000F6A143 /* SignUpViewController.swift */,
+				22545B6A1CAD7FC400F6A143 /* TutorEditViewController.swift */,
+				226F22CC1C6A422C001F5D9B /* ViewController.swift */,
+				226F22FF1C6A5853001F5D9B /* TutorLogInViewController.swift */,
+				2295013A1C899E64006C6707 /* StudentQueryViewController.swift */,
+				2295013C1C8C6561006C6707 /* TutorTableViewController.swift */,
+				2295013E1C8EDFC8006C6707 /* TutorTableViewCell.swift */,
+				229501401C92C7F2006C6707 /* TutorProfileViewController.swift */,
+				22545B7E1CAEB7BE00F6A143 /* ForgotYourPasswordViewController.swift */,
+				22545B801CB1617E00F6A143 /* BestTutorsViewController.swift */,
+				22545B841CB8FB8200F6A143 /* BestTutorsTableViewCell.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		226F22BE1C6A422C001F5D9B = {
+			isa = PBXGroup;
+			children = (
+				22545B4C1CAD653400F6A143 /* iTutor-Bridging-Header.h */,
+				226F22C91C6A422C001F5D9B /* iTutor */,
+				226F22E11C6A422C001F5D9B /* iTutorTests */,
+				226F22EC1C6A422C001F5D9B /* iTutorUITests */,
+				226F22C81C6A422C001F5D9B /* Products */,
+				F522926B98869CE98A70C60D /* Pods */,
+				0B95E5B9EADA2E8E7B4F81A0 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		226F22C81C6A422C001F5D9B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				226F22C71C6A422C001F5D9B /* iTutor.app */,
+				226F22DE1C6A422C001F5D9B /* iTutorTests.xctest */,
+				226F22E91C6A422C001F5D9B /* iTutorUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		226F22C91C6A422C001F5D9B /* iTutor */ = {
+			isa = PBXGroup;
+			children = (
+				22545B551CAD6C3700F6A143 /* Controller */,
+				22545B541CAD6C3300F6A143 /* View */,
+				22545B531CAD6C2800F6A143 /* Model */,
+				226F22CA1C6A422C001F5D9B /* AppDelegate.swift */,
+				22545B741CAD806200F6A143 /* Bolts.framework */,
+				22545B721CAD805A00F6A143 /* Parse.framework */,
+				226F22D41C6A422C001F5D9B /* Assets.xcassets */,
+				226F22D61C6A422C001F5D9B /* LaunchScreen.storyboard */,
+				226F22D91C6A422C001F5D9B /* Info.plist */,
+				226F22D11C6A422C001F5D9B /* iTutor.xcdatamodeld */,
+			);
+			path = iTutor;
+			sourceTree = "<group>";
+		};
+		226F22E11C6A422C001F5D9B /* iTutorTests */ = {
+			isa = PBXGroup;
+			children = (
+				226F22E21C6A422C001F5D9B /* iTutorTests.swift */,
+				226F22E41C6A422C001F5D9B /* Info.plist */,
+			);
+			path = iTutorTests;
+			sourceTree = "<group>";
+		};
+		226F22EC1C6A422C001F5D9B /* iTutorUITests */ = {
+			isa = PBXGroup;
+			children = (
+				226F22ED1C6A422C001F5D9B /* iTutorUITests.swift */,
+				226F22EF1C6A422C001F5D9B /* Info.plist */,
+			);
+			path = iTutorUITests;
+			sourceTree = "<group>";
+		};
+		F522926B98869CE98A70C60D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0B7576EF396B5125CF764CCD /* Pods-iTutor.debug.xcconfig */,
+				FA6FBB56B1A3D347C76F56B5 /* Pods-iTutor.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		226F22C61C6A422C001F5D9B /* iTutor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 226F22F21C6A422C001F5D9B /* Build configuration list for PBXNativeTarget "iTutor" */;
+			buildPhases = (
+				FAE77DAF6B3BBE8F6F707634 /* Check Pods Manifest.lock */,
+				226F22C31C6A422C001F5D9B /* Sources */,
+				226F22C41C6A422C001F5D9B /* Frameworks */,
+				226F22C51C6A422C001F5D9B /* Resources */,
+				4A950A5AB6B0872922B3C616 /* Embed Pods Frameworks */,
+				C158EC598864B75EB3469A41 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iTutor;
+			productName = iTutor;
+			productReference = 226F22C71C6A422C001F5D9B /* iTutor.app */;
+			productType = "com.apple.product-type.application";
+		};
+		226F22DD1C6A422C001F5D9B /* iTutorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 226F22F51C6A422C001F5D9B /* Build configuration list for PBXNativeTarget "iTutorTests" */;
+			buildPhases = (
+				226F22DA1C6A422C001F5D9B /* Sources */,
+				226F22DB1C6A422C001F5D9B /* Frameworks */,
+				226F22DC1C6A422C001F5D9B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				226F22E01C6A422C001F5D9B /* PBXTargetDependency */,
+			);
+			name = iTutorTests;
+			productName = iTutorTests;
+			productReference = 226F22DE1C6A422C001F5D9B /* iTutorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		226F22E81C6A422C001F5D9B /* iTutorUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 226F22F81C6A422C001F5D9B /* Build configuration list for PBXNativeTarget "iTutorUITests" */;
+			buildPhases = (
+				226F22E51C6A422C001F5D9B /* Sources */,
+				226F22E61C6A422C001F5D9B /* Frameworks */,
+				226F22E71C6A422C001F5D9B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				226F22EB1C6A422C001F5D9B /* PBXTargetDependency */,
+			);
+			name = iTutorUITests;
+			productName = iTutorUITests;
+			productReference = 226F22E91C6A422C001F5D9B /* iTutorUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		226F22BF1C6A422C001F5D9B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Syed Mohamed Ariff";
+				TargetAttributes = {
+					226F22C61C6A422C001F5D9B = {
+						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 6X3H886QAU;
+					};
+					226F22DD1C6A422C001F5D9B = {
+						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 6X3H886QAU;
+						TestTargetID = 226F22C61C6A422C001F5D9B;
+					};
+					226F22E81C6A422C001F5D9B = {
+						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 6X3H886QAU;
+						TestTargetID = 226F22C61C6A422C001F5D9B;
+					};
+				};
+			};
+			buildConfigurationList = 226F22C21C6A422C001F5D9B /* Build configuration list for PBXProject "iTutor" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 226F22BE1C6A422C001F5D9B;
+			productRefGroup = 226F22C81C6A422C001F5D9B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				226F22C61C6A422C001F5D9B /* iTutor */,
+				226F22DD1C6A422C001F5D9B /* iTutorTests */,
+				226F22E81C6A422C001F5D9B /* iTutorUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		226F22C51C6A422C001F5D9B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				226F22D81C6A422C001F5D9B /* LaunchScreen.storyboard in Resources */,
+				226F22D51C6A422C001F5D9B /* Assets.xcassets in Resources */,
+				226F22D01C6A422C001F5D9B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		226F22DC1C6A422C001F5D9B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		226F22E71C6A422C001F5D9B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4A950A5AB6B0872922B3C616 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iTutor/Pods-iTutor-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C158EC598864B75EB3469A41 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iTutor/Pods-iTutor-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FAE77DAF6B3BBE8F6F707634 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		226F22C31C6A422C001F5D9B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2295013D1C8C6561006C6707 /* TutorTableViewController.swift in Sources */,
+				226F22D31C6A422C001F5D9B /* iTutor.xcdatamodeld in Sources */,
+				22545B771CAD808D00F6A143 /* TutorFavoriteTableViewCell.swift in Sources */,
+				226F22CD1C6A422C001F5D9B /* ViewController.swift in Sources */,
+				229501411C92C7F2006C6707 /* TutorProfileViewController.swift in Sources */,
+				22545B671CAD7F8C00F6A143 /* CheckInternet.swift in Sources */,
+				22545B7F1CAEB7BE00F6A143 /* ForgotYourPasswordViewController.swift in Sources */,
+				22545B851CB8FB8200F6A143 /* BestTutorsTableViewCell.swift in Sources */,
+				22545B811CB1617E00F6A143 /* BestTutorsViewController.swift in Sources */,
+				226F22CB1C6A422C001F5D9B /* AppDelegate.swift in Sources */,
+				22545B6F1CAD7FED00F6A143 /* TutorFavoritesViewController.swift in Sources */,
+				22545B691CAD7FAC00F6A143 /* PersistedPFObject.swift in Sources */,
+				22545B6D1CAD7FE000F6A143 /* SignUpViewController.swift in Sources */,
+				2295013F1C8EDFC8006C6707 /* TutorTableViewCell.swift in Sources */,
+				22545B6B1CAD7FC400F6A143 /* TutorEditViewController.swift in Sources */,
+				226F23001C6A5853001F5D9B /* TutorLogInViewController.swift in Sources */,
+				2295013B1C899E64006C6707 /* StudentQueryViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		226F22DA1C6A422C001F5D9B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				226F22E31C6A422C001F5D9B /* iTutorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		226F22E51C6A422C001F5D9B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				226F22EE1C6A422C001F5D9B /* iTutorUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		226F22E01C6A422C001F5D9B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 226F22C61C6A422C001F5D9B /* iTutor */;
+			targetProxy = 226F22DF1C6A422C001F5D9B /* PBXContainerItemProxy */;
+		};
+		226F22EB1C6A422C001F5D9B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 226F22C61C6A422C001F5D9B /* iTutor */;
+			targetProxy = 226F22EA1C6A422C001F5D9B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		226F22CE1C6A422C001F5D9B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				226F22CF1C6A422C001F5D9B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		226F22D61C6A422C001F5D9B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				226F22D71C6A422C001F5D9B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		226F22F01C6A422C001F5D9B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		226F22F11C6A422C001F5D9B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		226F22F31C6A422C001F5D9B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0B7576EF396B5125CF764CCD /* Pods-iTutor.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/iTutor",
+				);
+				INFOPLIST_FILE = iTutor/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ariff.iTutor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iTutor-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		226F22F41C6A422C001F5D9B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA6FBB56B1A3D347C76F56B5 /* Pods-iTutor.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/iTutor",
+				);
+				INFOPLIST_FILE = iTutor/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ariff.iTutor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iTutor-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		226F22F61C6A422C001F5D9B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = iTutorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ariff.iTutorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iTutor.app/iTutor";
+			};
+			name = Debug;
+		};
+		226F22F71C6A422C001F5D9B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = iTutorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ariff.iTutorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iTutor.app/iTutor";
+			};
+			name = Release;
+		};
+		226F22F91C6A422C001F5D9B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = iTutorUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ariff.iTutorUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = iTutor;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		226F22FA1C6A422C001F5D9B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = iTutorUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ariff.iTutorUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = iTutor;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		226F22C21C6A422C001F5D9B /* Build configuration list for PBXProject "iTutor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				226F22F01C6A422C001F5D9B /* Debug */,
+				226F22F11C6A422C001F5D9B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		226F22F21C6A422C001F5D9B /* Build configuration list for PBXNativeTarget "iTutor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				226F22F31C6A422C001F5D9B /* Debug */,
+				226F22F41C6A422C001F5D9B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		226F22F51C6A422C001F5D9B /* Build configuration list for PBXNativeTarget "iTutorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				226F22F61C6A422C001F5D9B /* Debug */,
+				226F22F71C6A422C001F5D9B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		226F22F81C6A422C001F5D9B /* Build configuration list for PBXNativeTarget "iTutorUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				226F22F91C6A422C001F5D9B /* Debug */,
+				226F22FA1C6A422C001F5D9B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		226F22D11C6A422C001F5D9B /* iTutor.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				226F22D21C6A422C001F5D9B /* iTutor.xcdatamodel */,
+			);
+			currentVersion = 226F22D21C6A422C001F5D9B /* iTutor.xcdatamodel */;
+			path = iTutor.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 226F22BF1C6A422C001F5D9B /* Project object */;
+}

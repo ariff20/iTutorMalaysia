@@ -4,7 +4,22 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>BLKFlexibleHeightBar.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Cosmos.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Eureka.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Material-io.cosmicmind.Material.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -22,17 +37,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>31EF08F3444DCD2B169D92269C5BCD3D</key>
+		<key>13AC9490738629C70BD6BE922AB8B889</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>822EC067062F6B86A9468B7BBBE5AAE3</key>
+		<key>608B49B5DDACC601EE8044A1931993F9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FC65DF308B9935E7D80B8E4FFF1901A9</key>
+		<key>7AAA83A0B19E9AB585A6FFE3AAF1D304</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7E82EF3158DC7672612EFE46DB8E4C8F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9307722F2AEBE33C4EF571F6B689BA45</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F232F88DF711FB1EC9C2A9CDE4D7B6BA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

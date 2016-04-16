@@ -47,4 +47,5 @@ struct CheckInternet
         
        view.layer.addAnimation(animation, forKey: "position")
     }
+    
 }

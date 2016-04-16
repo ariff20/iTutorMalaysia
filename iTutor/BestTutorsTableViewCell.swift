@@ -7,9 +7,15 @@
 //
 
 import UIKit
-
+import Cosmos
 class BestTutorsTableViewCell: UITableViewCell {
 
+    @IBOutlet var tutorstate: UILabel!
+    @IBOutlet var tutorrating: CosmosView!
+    @IBOutlet var tutorpricerange: UILabel!
+    @IBOutlet var tutordescription: UILabel!
+    @IBOutlet var tutorname: UILabel!
+    @IBOutlet var tutorimage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

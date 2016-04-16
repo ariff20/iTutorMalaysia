@@ -44,7 +44,7 @@ public class MaterialLayer : CAShapeLayer {
 	public private(set) lazy var visualLayer: CAShapeLayer = CAShapeLayer()
 
 	/// A property that accesses the layer.frame.origin.x property.
-	public var x: CGFloat {
+	@IBInspectable public var x: CGFloat {
 		get {
 			return frame.origin.x
 		}
@@ -54,7 +54,7 @@ public class MaterialLayer : CAShapeLayer {
 	}
 	
 	/// A property that accesses the layer.frame.origin.y property.
-	public var y: CGFloat {
+	@IBInspectable public var y: CGFloat {
 		get {
 			return frame.origin.y
 		}
@@ -69,7 +69,7 @@ public class MaterialLayer : CAShapeLayer {
 	value that is not .None, the height will be adjusted to maintain the correct
 	shape.
 	*/
-	public var width: CGFloat {
+	@IBInspectable public var width: CGFloat {
 		get {
 			return frame.size.width
 		}
@@ -87,7 +87,7 @@ public class MaterialLayer : CAShapeLayer {
 	value that is not .None, the width will be adjusted to maintain the correct
 	shape.
 	*/
-	public var height: CGFloat {
+	@IBInspectable public var height: CGFloat {
 		get {
 			return frame.size.height
 		}
@@ -104,7 +104,7 @@ public class MaterialLayer : CAShapeLayer {
 	property. Images should not be set to the backing layer's contents
 	property to avoid conflicts when using clipsToBounds.
 	*/
-	public var image: UIImage? {
+	@IBInspectable public var image: UIImage? {
 		didSet {
 			visualLayer.contents = image?.CGImage
 		}
@@ -135,17 +135,23 @@ public class MaterialLayer : CAShapeLayer {
 	/**
 	A floating point value that defines a ratio between the pixel
 	dimensions of the visualLayer's contents property and the size
-	of the layer. By default, this value is set to the UIScreen's
-	scale value, UIScreen.mainScreen().scale.
+	of the layer. By default, this value is set to the MaterialDevice.scale.
 	*/
-	public override var contentsScale: CGFloat {
+	@IBInspectable public override var contentsScale: CGFloat {
 		didSet {
 			visualLayer.contentsScale = contentsScale
 		}
 	}
 	
+	/// A Preset for the contentsGravity property.
+	public var contentsGravityPreset: MaterialGravity {
+		didSet {
+			contentsGravity = MaterialGravityToString(contentsGravityPreset)
+		}
+	}
+	
 	/// Determines how content should be aligned within the visualLayer's bounds.
-	public override var contentsGravity: String {
+	@IBInspectable public override var contentsGravity: String {
 		get {
 			return visualLayer.contentsGravity
 		}
@@ -154,17 +160,29 @@ public class MaterialLayer : CAShapeLayer {
 		}
 	}
 	
+	/// Enables automatic shadowPath sizing.
+	@IBInspectable public var shadowPathAutoSizeEnabled: Bool = true {
+		didSet {
+			if shadowPathAutoSizeEnabled {
+				layoutShadowPath()
+			} else {
+				shadowPath = nil
+			}
+		}
+	}
+	
 	/**
 	A property that sets the shadowOffset, shadowOpacity, and shadowRadius
 	for the backing layer. This is the preferred method of setting depth
 	in order to maintain consitency across UI objects.
 	*/
-	public var depth: MaterialDepth {
+	public var depth: MaterialDepth = .None {
 		didSet {
 			let value: MaterialDepthType = MaterialDepthToValue(depth)
 			shadowOffset = value.offset
 			shadowOpacity = value.opacity
 			shadowRadius = value.radius
+			layoutShadowPath()
 		}
 	}
 	
@@ -173,8 +191,22 @@ public class MaterialLayer : CAShapeLayer {
 	property has a value of .Circle when the cornerRadius is set, it will
 	become .None, as it no longer maintains its circle shape.
 	*/
-	public override var cornerRadius: CGFloat {
+	public var cornerRadiusPreset: MaterialRadius = .None {
 		didSet {
+			if let v: MaterialRadius = cornerRadiusPreset {
+				cornerRadius = MaterialRadiusToValue(v)
+			}
+		}
+	}
+	
+	/**
+	A property that sets the cornerRadius of the backing layer. If the shape
+	property has a value of .Circle when the cornerRadius is set, it will
+	become .None, as it no longer maintains its circle shape.
+	*/
+	@IBInspectable public override var cornerRadius: CGFloat {
+		didSet {
+			layoutShadowPath()
 			if .Circle == shape {
 				shape = .None
 			}
@@ -186,7 +218,7 @@ public class MaterialLayer : CAShapeLayer {
 	width or height property is set, the other will be automatically adjusted
 	to maintain the shape of the object.
 	*/
-	public var shape: MaterialShape {
+	public var shape: MaterialShape = .None {
 		didSet {
 			if .None != shape {
 				if width < height {
@@ -194,7 +226,15 @@ public class MaterialLayer : CAShapeLayer {
 				} else {
 					frame.size.height = width
 				}
+				layoutShadowPath()
 			}
+		}
+	}
+	
+	/// A preset property to set the borderWidth.
+	public var borderWidthPreset: MaterialBorder = .None {
+		didSet {
+			borderWidth = MaterialBorderToValue(borderWidthPreset)
 		}
 	}
 	
@@ -203,8 +243,7 @@ public class MaterialLayer : CAShapeLayer {
 	- Parameter aDecoder: A NSCoder instance.
 	*/
 	public required init?(coder aDecoder: NSCoder) {
-		shape = .None
-		depth = .None
+		contentsGravityPreset = .ResizeAspectFill
 		super.init(coder: aDecoder)
 		prepareVisualLayer()
 	}
@@ -215,16 +254,13 @@ public class MaterialLayer : CAShapeLayer {
 	- Parameter layer: AnyObject.
 	*/
 	public override init(layer: AnyObject) {
-		shape = .None
-		depth = .None
+		contentsGravityPreset = .ResizeAspectFill
 		super.init()
-		prepareVisualLayer()
 	}
 	
 	/// A convenience initializer.
 	public override init() {
-		shape = .None
-		depth = .None
+		contentsGravityPreset = .ResizeAspectFill
 		super.init()
 		prepareVisualLayer()
 	}
@@ -251,7 +287,7 @@ public class MaterialLayer : CAShapeLayer {
 	public func animate(animation: CAAnimation) {
 		animation.delegate = self
 		if let a: CABasicAnimation = animation as? CABasicAnimation {
-			a.fromValue = valueForKeyPath(a.keyPath!)
+			a.fromValue = (nil == presentationLayer() ? self : presentationLayer() as! CALayer).valueForKeyPath(a.keyPath!)
 		}
 		if let a: CAPropertyAnimation = animation as? CAPropertyAnimation {
 			addAnimation(a, forKey: a.keyPath!)
@@ -282,18 +318,19 @@ public class MaterialLayer : CAShapeLayer {
 	public override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
 		if let a: CAPropertyAnimation = anim as? CAPropertyAnimation {
 			if let b: CABasicAnimation = a as? CABasicAnimation {
-				MaterialAnimation.animationDisabled { [unowned self] in
-					self.setValue(nil == b.toValue ? b.byValue : b.toValue, forKey: b.keyPath!)
+				if let v: AnyObject = b.toValue {
+					if let k: String = b.keyPath {
+						setValue(v, forKeyPath: k)
+						removeAnimationForKey(k)
+					}
 				}
 			}
 			(delegate as? MaterialAnimationDelegate)?.materialAnimationDidStop?(anim, finished: flag)
-			removeAnimationForKey(a.keyPath!)
 		} else if let a: CAAnimationGroup = anim as? CAAnimationGroup {
 			for x in a.animations! {
 				animationDidStop(x, finished: true)
 			}
 		}
-		layoutVisualLayer()
 	}
 	
 	/// Prepares the visualLayer property.
@@ -307,14 +344,29 @@ public class MaterialLayer : CAShapeLayer {
 	/// Manages the layout for the visualLayer property.
 	internal func layoutVisualLayer() {
 		visualLayer.frame = bounds
-		visualLayer.position = CGPointMake(width / 2, height / 2)
 		visualLayer.cornerRadius = cornerRadius
 	}
 	
 	/// Manages the layout for the shape of the layer instance.
 	internal func layoutShape() {
 		if .Circle == shape {
-			cornerRadius = width / 2
+			let w: CGFloat = (width / 2)
+			if w != cornerRadius {
+				cornerRadius = w
+			}
+		}
+	}
+	
+	/// Sets the shadow path.
+	internal func layoutShadowPath() {
+		if shadowPathAutoSizeEnabled {
+			if .None == depth {
+				shadowPath = nil
+			} else if nil == shadowPath {
+				shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).CGPath
+			} else {
+				animate(MaterialAnimation.shadowPath(UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).CGPath, duration: 0))
+			}
 		}
 	}
 }

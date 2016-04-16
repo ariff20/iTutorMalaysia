@@ -84,10 +84,14 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods-iTutor/BLKFlexibleHeightBar.framework"
+  install_framework "Pods-iTutor/Cosmos.framework"
   install_framework "Pods-iTutor/Eureka.framework"
   install_framework "Pods-iTutor/Material.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods-iTutor/BLKFlexibleHeightBar.framework"
+  install_framework "Pods-iTutor/Cosmos.framework"
   install_framework "Pods-iTutor/Eureka.framework"
   install_framework "Pods-iTutor/Material.framework"
 fi

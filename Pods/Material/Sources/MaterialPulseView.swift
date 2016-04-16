@@ -31,14 +31,45 @@
 import UIKit
 
 public class MaterialPulseView : MaterialView {
+	/// To use a single pulse and have it focused when held.
+	@IBInspectable public var pulseFocus: Bool = false
+	
+	/// A pulse layer for focus handling.
+	public private(set) var pulseLayer: CAShapeLayer?
+	
 	/// Sets whether the scaling animation should be used.
-	public lazy var pulseScale: Bool = true
+	@IBInspectable public lazy var pulseScale: Bool = true
 	
 	/// The opcaity value for the pulse animation.
-	public var pulseColorOpacity: CGFloat = 0.25
+	@IBInspectable public var pulseOpacity: CGFloat = 0.25
 	
 	/// The color of the pulse effect.
-	public var pulseColor: UIColor?
+	@IBInspectable public var pulseColor: UIColor?
+	
+	/**
+	Triggers the pulse animation.
+	- Parameter point: A Optional point to pulse from, otherwise pulses
+	from the center.
+	*/
+	public func pulse(point: CGPoint? = nil) {
+		let p: CGPoint = nil == point ? CGPointMake(CGFloat(width / 2), CGFloat(height / 2)) : point!
+		let duration: NSTimeInterval = MaterialAnimation.pulseDuration(width)
+		
+		if let v: UIColor = pulseColor {
+			MaterialAnimation.pulseAnimation(layer, visualLayer: visualLayer, color: v.colorWithAlphaComponent(pulseOpacity), point: p, width: width, height: height, duration: duration)
+		}
+		
+		if pulseScale {
+			MaterialAnimation.expandAnimation(layer, scale: 1.05, duration: duration)
+			MaterialAnimation.delay(duration) { [weak self] in
+				if let l: CALayer = self?.layer {
+					if let w: CGFloat = self?.width {
+						MaterialAnimation.shrinkAnimation(l, width: w, duration: duration)
+					}
+				}
+			}
+		}
+	}
 	
 	/**
 	A delegation method that is executed when the view has began a
@@ -48,7 +79,19 @@ public class MaterialPulseView : MaterialView {
 	*/
 	public override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
 		super.touchesBegan(touches, withEvent: event)
-		pulseAnimation(layer.convertPoint(touches.first!.locationInView(self), fromLayer: layer))
+		let duration: NSTimeInterval = MaterialAnimation.pulseDuration(width)
+		
+		if pulseFocus {
+			pulseLayer = CAShapeLayer()
+		}
+		
+		if let v: UIColor = pulseColor {
+			MaterialAnimation.pulseAnimation(layer, visualLayer: visualLayer, color: v.colorWithAlphaComponent(pulseOpacity), point: layer.convertPoint(touches.first!.locationInView(self), fromLayer: layer), width: width, height: height, duration: duration, pulseLayer: pulseLayer)
+		}
+		
+		if pulseScale {
+			MaterialAnimation.expandAnimation(layer, scale: 1.05, duration: duration)
+		}
 	}
 	
 	/**
@@ -59,7 +102,7 @@ public class MaterialPulseView : MaterialView {
 	*/
 	public override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
 		super.touchesEnded(touches, withEvent: event)
-		shrinkAnimation()
+		MaterialAnimation.shrinkAnimation(layer, width: width, duration: MaterialAnimation.pulseDuration(width), pulseLayer: pulseLayer)
 	}
 	
 	/**
@@ -70,24 +113,7 @@ public class MaterialPulseView : MaterialView {
 	*/
 	public override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
 		super.touchesCancelled(touches, withEvent: event)
-		shrinkAnimation()
-	}
-	
-	/**
-	Triggers the pulse animation.
-	- Parameter point: A Optional point to pulse from, otherwise pulses
-	from the center.
-	*/
-	public func pulse(var point: CGPoint? = nil) {
-		if nil == point {
-			point = CGPointMake(CGFloat(width / 2), CGFloat(height / 2))
-		}
-		
-		if let v: CFTimeInterval = pulseAnimation(point!) {
-			MaterialAnimation.delay(v) { [unowned self] in
-				self.shrinkAnimation()
-			}
-		}
+		MaterialAnimation.shrinkAnimation(layer, width: width, duration: MaterialAnimation.pulseDuration(width), pulseLayer: pulseLayer)
 	}
 	
 	/**
@@ -100,71 +126,5 @@ public class MaterialPulseView : MaterialView {
 	public override func prepareView() {
 		super.prepareView()
 		pulseColor = MaterialColor.white
-	}
-	
-	/**
-	Triggers the pulse animation.
-	- Parameter point: A point to pulse from.
-	- Returns: A Ooptional CFTimeInternal if the point exists within
-	the view. The time internal represents the animation time.
-	*/
-	internal func pulseAnimation(point: CGPoint) -> CFTimeInterval? {
-		if true == layer.containsPoint(point) {
-			let r: CGFloat = (width < height ? height : width) / 2
-			let f: CGFloat = 3
-			let v: CGFloat = r / f
-			let d: CGFloat = 2 * f
-			let s: CGFloat = 1.05
-			
-			var t: CFTimeInterval = CFTimeInterval(1.5 * width / UIScreen.mainScreen().bounds.width)
-			if 0.55 < t || 0.25 > t {
-				t = 0.55
-			}
-			t /= 1.3
-			
-			if nil != pulseColor && 0 < pulseColorOpacity {
-				let pulseLayer: CAShapeLayer = CAShapeLayer()
-				
-				pulseLayer.hidden = true
-				pulseLayer.zPosition = 1
-				pulseLayer.backgroundColor = pulseColor?.colorWithAlphaComponent(pulseColorOpacity).CGColor
-				visualLayer.addSublayer(pulseLayer)
-				
-				MaterialAnimation.animationDisabled {
-					pulseLayer.bounds = CGRectMake(0, 0, v, v)
-					pulseLayer.position = point
-					pulseLayer.cornerRadius = r / d
-					pulseLayer.hidden = false
-				}
-				pulseLayer.addAnimation(MaterialAnimation.scale(3 * d, duration: t), forKey: nil)
-				MaterialAnimation.delay(t) { [unowned self] in
-					if nil != self.pulseColor && 0 < self.pulseColorOpacity {
-						MaterialAnimation.animateWithDuration(t, animations: {
-							pulseLayer.hidden = true
-						}) {
-								pulseLayer.removeFromSuperlayer()
-						}
-					}
-				}
-			}
-			
-			if pulseScale {
-				layer.addAnimation(MaterialAnimation.scale(s, duration: t), forKey: nil)
-				return t
-			}
-		}
-		return nil
-	}
-	
-	/// Executes the shrink animation for the pulse effect.
-	internal func shrinkAnimation() {
-		if pulseScale {
-			var t: CFTimeInterval = CFTimeInterval(1.5 * width / UIScreen.mainScreen().bounds.width)
-			if 0.55 < t || 0.25 > t {
-				t = 0.55
-			}
-			t /= 1.3
-			layer.addAnimation(MaterialAnimation.scale(1, duration: t), forKey: nil)
-		}
 	}
 }

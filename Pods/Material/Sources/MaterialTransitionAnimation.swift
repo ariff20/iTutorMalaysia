@@ -73,9 +73,9 @@ public func MaterialAnimationTransitionSubTypeToValue(direction: MaterialAnimati
 	case .Left:
 		return kCATransitionFromLeft
 	case .Top:
-		return kCATransitionFromTop
-	case .Bottom:
 		return kCATransitionFromBottom
+	case .Bottom:
+		return kCATransitionFromTop
 	}
 }
 
@@ -89,8 +89,8 @@ public extension MaterialAnimation {
 		if let d = direction {
 			animation.subtype = MaterialAnimationTransitionSubTypeToValue(d)
 		}
-		if let d = duration {
-			animation.duration = d
+		if let v: CFTimeInterval = duration {
+			animation.duration = v
 		}
 		return animation
 	}

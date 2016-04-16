@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "_default": {
+      "link": "iTutorMalaysia"
+    },
+    "iTutorMalaysia": {
+      "applicationId": "xTvr3Z1OBf2iLAAmoCcyjOh0v4CkZNu19XYzUZ0n"
+    }
+  }
+}

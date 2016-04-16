@@ -19,16 +19,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         tutorbutton.setTitle("Tutor", forState: .Normal)
         studentbutton.setTitle("Student", forState: .Normal)
+        self.view.backgroundColor = MaterialColor.blue.lighten1
         
-        // Add button to UIViewController.
-       
-    
-        // Do any additional setup after loading the view, typically from a nib.
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
 
 
@@ -36,8 +34,13 @@ class ViewController: UIViewController {
     {
         performSegueWithIdentifier("Tutor", sender: self)
     }
-    @IBAction func studenttapped(sender: FlatButton) {
-    }
+   
     
+    
+    
+    @IBAction func studenttapped(sender: AnyObject)
+    {
+         performSegueWithIdentifier("Student", sender: self)
+    }
 }
 
