@@ -66,51 +66,55 @@ class TutorProfileViewController: UIViewController,MFMailComposeViewControllerDe
                 if (internet)
                 {
                     let query = PFUser.query()
-                    query!.getObjectInBackgroundWithId(self.objectid!) {
-                        (tutorobject: PFObject?, error: NSError?) -> Void in
-                        if error == nil && tutorobject != nil
-                        {
-                            
-                            let subjects : NSArray = tutorobject?.valueForKey("Subjects")   as! NSArray
-                            let levels : NSArray = tutorobject?.valueForKey("Levels") as! NSArray
-                            let days : NSArray = tutorobject?.valueForKey("Days") as! NSArray
-                            self.tutsubjects.text = subjects.componentsJoinedByString(",")
-                            self.tutlevels.text = levels.componentsJoinedByString(",")
-                            self.tutdays.text = days.componentsJoinedByString(",")
-                            self.tutpricingrange.text = tutorobject?.valueForKey("PricingRange") as? String
-                            self.tutname.text = tutorobject?.valueForKey("Name") as? String
-                            self.tuttown.text = tutorobject?.valueForKey("Town") as? String
-                            self.tutstate.text = tutorobject?.valueForKey("State") as? String
-                            self.tutgender.text = tutorobject?.valueForKey("Gender") as? String
-                            self.tutdesc.text = tutorobject?.valueForKey("Desc") as? String
-                            self.tutor = tutorobject
-                            if let ratingzz = tutorobject?.valueForKey("Rating") as? Double
-                            {
-                                self.rating.rating = ratingzz
-                            }
-                            
-                           
+                    if let objectID = self.objectid {
                         
-                          
-                            if let tutorPic = tutorobject?.valueForKey("ProfPhoto") as! PFFile!
+                        query!.getObjectInBackgroundWithId(objectID) {
+                            (tutorobject: PFObject?, error: NSError?) -> Void in
+                            if error == nil && tutorobject != nil
                             {
-                                tutorPic.getDataInBackgroundWithBlock({(imageData:NSData?,error:NSError?)->Void in
-                                    if(error == nil)
-                                    {
-                                        let image = UIImage(data: imageData!)
-                                        self.tutimage.image = image
-                                        self.tutimage.layer.cornerRadius = self.tutimage.frame.size.height/2
-                                        self.tutimage.layer.borderWidth = 1
-                                        self.tutimage.layer.borderColor = UIColor.blueColor().CGColor
-                                        self.tutimage.clipsToBounds = true
-                                        
-                                    }
-                                })
+                                
+                                let subjects : NSArray = tutorobject?.valueForKey("Subjects")   as! NSArray
+                                let levels : NSArray = tutorobject?.valueForKey("Levels") as! NSArray
+                                let days : NSArray = tutorobject?.valueForKey("Days") as! NSArray
+                                self.tutsubjects.text = subjects.componentsJoinedByString(",")
+                                self.tutlevels.text = levels.componentsJoinedByString(",")
+                                self.tutdays.text = days.componentsJoinedByString(",")
+                                self.tutpricingrange.text = tutorobject?.valueForKey("PricingRange") as? String
+                                self.tutname.text = tutorobject?.valueForKey("Name") as? String
+                                self.tuttown.text = tutorobject?.valueForKey("Town") as? String
+                                self.tutstate.text = tutorobject?.valueForKey("State") as? String
+                                self.tutgender.text = tutorobject?.valueForKey("Gender") as? String
+                                self.tutdesc.text = tutorobject?.valueForKey("Desc") as? String
+                                self.tutor = tutorobject
+                                if let ratingzz = tutorobject?.valueForKey("Rating") as? Double
+                                {
+                                    self.rating.rating = ratingzz
+                                }
+                                
+                                
+                                
+                                
+                                if let tutorPic = tutorobject?.valueForKey("ProfPhoto") as! PFFile!
+                                {
+                                    tutorPic.getDataInBackgroundWithBlock({(imageData:NSData?,error:NSError?)->Void in
+                                        if(error == nil)
+                                        {
+                                            let image = UIImage(data: imageData!)
+                                            self.tutimage.image = image
+                                            self.tutimage.layer.cornerRadius = self.tutimage.frame.size.height/2
+                                            self.tutimage.layer.borderWidth = 1
+                                            self.tutimage.layer.borderColor = UIColor.blueColor().CGColor
+                                            self.tutimage.clipsToBounds = true
+                                            
+                                        }
+                                    })
+                                }
+                            } else {
+                                print(error)
                             }
-                        } else {
-                            print(error)
                         }
                     }
+                    
 
                     
                 }

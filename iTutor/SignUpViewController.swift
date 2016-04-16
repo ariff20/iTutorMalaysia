@@ -150,8 +150,7 @@ class SignUpViewController: FormViewController
     func showAlert(title : String?,message : String?)
     {
         let alertz = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        alertz.addAction(UIAlertAction(title: "OK", style: .Default) { _ in
-            self.dismissViewControllerAnimated(true, completion: nil)})
+        alertz.addAction(UIAlertAction(title: "OK", style: .Default) { _ in})
         self.presentViewController(alertz, animated: true){}
     }
 func doneTapped()
@@ -245,38 +244,38 @@ func doneTapped()
     if let town = form.rowByTag("Town")?.baseValue as? AnyObject
     {
         user["Town"] = town
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString((form.rowByTag("Town")?.baseValue as? String)!){
+            placemark, error in
+            if let error = error {
+                let alertz = UIAlertController(title: "Oops!", message:"\(error.localizedDescription)", preferredStyle: .Alert)
+                alertz.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
+                self.presentViewController(alertz, animated: true){}
+                return
+            }
+            if let  placemark = placemark{
+                user["StateGeopoint"] = 0
+                if placemark.count > 0 {
+                    
+                    let placemark = placemark.first!
+                    let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
+                    self.tutorGeoPointz.latitude = coordinates.latitude
+                    self.tutorGeoPointz.longitude = coordinates.longitude
+                    print(self.tutorGeoPointz)
+                    
+                    user["StateGeopoint"] = PFGeoPoint(latitude: self.tutorGeoPointz.latitude, longitude: self.tutorGeoPointz.longitude)
+                    
+                }
+            
+            }
+        }
     }
     else
     {
         self.showAlert("Error!", message: "Please enter your town!")
     }
     
-    let geocoder = CLGeocoder()
-    geocoder.geocodeAddressString((form.rowByTag("Town")?.baseValue as? String)!){
-        placemark, error in
-        if let error = error {
-            let alertz = UIAlertController(title: "Oops!", message:"\(error.localizedDescription)", preferredStyle: .Alert)
-            alertz.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
-            self.presentViewController(alertz, animated: true){}
-            return
-        }
-        if let  placemark = placemark{
-            user["StateGeopoint"] = 0
-            if placemark.count > 0 {
-                
-                let placemark = placemark.first!
-                let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
-                self.tutorGeoPointz.latitude = coordinates.latitude
-                self.tutorGeoPointz.longitude = coordinates.longitude
-                print(self.tutorGeoPointz)
-                
-                user["StateGeopoint"] = PFGeoPoint(latitude: self.tutorGeoPointz.latitude, longitude: self.tutorGeoPointz.longitude)
-        
-            }
-        }
-        
-        
-    }
+  
     if let days = form.rowByTag("Day")?.baseValue as? Set<String>
     {
         let day = days.flatMap { $0 }

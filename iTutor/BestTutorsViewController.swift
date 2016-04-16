@@ -16,6 +16,7 @@ class BestTutorsViewController: UIViewController,UITableViewDataSource,UITableVi
     @IBOutlet var mySegmentedControl: UISegmentedControl!
     let manager = CLLocationManager()
      var refreshControl: UIRefreshControl!
+    var indexpath : NSIndexPath?
     //The ratings powered tutor array
     var tutorbyratingObjects : [PFObject] = []
     //The location powered tutor array
@@ -114,6 +115,7 @@ class BestTutorsViewController: UIViewController,UITableViewDataSource,UITableVi
     internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let myCell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as? BestTutorsTableViewCell
+        indexpath = indexPath
         switch(mySegmentedControl.selectedSegmentIndex)
         {
         case 0:
@@ -279,8 +281,12 @@ class BestTutorsViewController: UIViewController,UITableViewDataSource,UITableVi
                           tutordetail.objectid = tutore.objectId
                         break
                     case 1:
-                         let tutor = tutorbystateObjects[index]
-                        tutordetail.objectid = tutor.objectId
+                        if(self.indexpath?.row < tutorbystateObjects.count)
+                        {
+                            let tutor = tutorbystateObjects[index]
+                            tutordetail.objectid = tutor.objectId
+                        }
+                        
                         break
                     default:
                         break
