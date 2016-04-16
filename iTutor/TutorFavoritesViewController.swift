@@ -23,6 +23,7 @@ class TutorFavoritesViewController:UITableViewController
         self.refreshControl?.addTarget(self, action: #selector(handlerefresh), forControlEvents: UIControlEvents.ValueChanged)
     
         if let array = NSKeyedUnarchiver.unarchiveObjectWithFile(self.appDelegate.tutorsFilePath) as? [PersistedPFObject] {
+            print(array)
             pftutorarray = array
         
             print(pftutorarray)

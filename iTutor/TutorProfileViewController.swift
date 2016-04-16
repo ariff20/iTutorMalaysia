@@ -52,10 +52,9 @@ class TutorProfileViewController: UIViewController,MFMailComposeViewControllerDe
     var studenttutors : [String] = []
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     //Array of persisted pfobjects
-    var tutors : [PersistedPFObject] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.toolbar.hidden = true
         prepareMenuViewExample()
         ratinginput.hidden = true
         ratinginput.didFinishTouchingCosmos = didFinishTouchingCosmos
@@ -343,20 +342,22 @@ class TutorProfileViewController: UIViewController,MFMailComposeViewControllerDe
                     (tutorobject: PFObject?, error: NSError?) -> Void in
                     if error == nil && tutorobject != nil
                     {
-                        //Create PersistedPFObejct instance
+                        //Create PersistedPFObject instance
                         let persist = PersistedPFObject(objectID: objectfavorite, name: tutorobject!["Name"] as! String, phoneNo: tutorobject!["PhoneNo"] as! String
                             , state: tutorobject!["State"] as! String
 , town: tutorobject!["Town"] as! String, gender: tutorobject!["Gender"] as! String)
                        
                         //Append it to the array
-                        self.tutors.append(persist)
+                        
+                        self.appDelegate.tutors.append(persist)
                         
                         let qualityOfServiceClass = QOS_CLASS_BACKGROUND
                         let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
                         dispatch_async(backgroundQueue, {
+                            
                             print("This is running on the background queue")
                             
-                            NSKeyedArchiver.archiveRootObject(self.tutors, toFile:self.appDelegate.tutorsFilePath)
+                            NSKeyedArchiver.archiveRootObject(self.appDelegate.tutors, toFile:self.appDelegate.tutorsFilePath)
                             let alertz = UIAlertController(title: "Great!", message:"Added to favorites!", preferredStyle: .Alert)
                             alertz.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
                             self.presentViewController(alertz, animated: true){}

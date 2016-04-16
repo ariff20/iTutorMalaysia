@@ -214,14 +214,13 @@ class TutorEditViewController: FormViewController
         PFUser.currentUser()?.deleteInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
             
             if success {
-                print("yoo")
+                
                 let alertController = UIAlertController(title: "Success!", message: "Now Please Login", preferredStyle: .Alert)
                 
                 let enterAppAction = UIAlertAction(title: "OK", style: .Default, handler: { (UIAlertAction) -> Void in
                     
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("TutorLoginViewController")
-                        self.presentViewController(viewController, animated: true, completion: nil)
+                         self.performSegueWithIdentifier("tutorlogin", sender: self)
                     })
                 })
                 

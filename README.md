@@ -2,6 +2,8 @@
 
 iTutorMalaysia is a lightweight and simple app that bridges the gap when it comes to the discovery and communication between students and tutors.
 
+
+
 ## iTutorMalaysia provides the following features :
 
 ### Student
@@ -15,8 +17,19 @@ iTutorMalaysia is a lightweight and simple app that bridges the gap when it come
   - Log in to edit your data if there is any changes.
   - Delete your account anytime if you feel like it.
   
+### Installlation
+
+This app uses multiple frameworks from Cocoapods.Therefore,you need to run an install of all the pods involved.
+To install the pods,follow this process
+
+- Open up terminal
+- Navigate to the project directory
+- type in ``pod install`` to install the pods
+- Done!
+
 ### Version
 1.0.0
+
 ## Frequently Asked Questions :
 
 ### Student

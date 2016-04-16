@@ -159,7 +159,15 @@ func doneTapped()
      let user = PFUser()
     if let userName = form.rowByTag("Emaillol")?.baseValue as? String
     {
-        user.username = userName
+        if(userName.characters.count < 5)
+        {
+            self.showAlert("Sorry!", message: "Email has to be more than 5 characters!")
+        }
+        else
+        {
+            user.username = userName
+        }
+        
     }
     else
     {
@@ -167,7 +175,15 @@ func doneTapped()
     }
     if let passWord = form.rowByTag("Passwordlol")?.baseValue as? String
     {
-        user.password = passWord
+        if(passWord.characters.count < 5)
+        {
+            self.showAlert("Sorry!", message: "Password has to be more than 5 characters!")
+        }
+        else
+        {
+           user.password = passWord
+        }
+        
     }
     else
     {

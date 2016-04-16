@@ -24,7 +24,7 @@ class BestTutorsViewController: UIViewController,UITableViewDataSource,UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Tutors Available"
-        self.navigationController?.toolbarHidden = false
+        self.navigationController?.setToolbarHidden(false, animated: true)
         var items: Array<UIBarButtonItem> = []
        
         let favorite = UIBarButtonItem(title: "Favorites", style: .Plain, target: self, action: #selector(touchPickImage))
