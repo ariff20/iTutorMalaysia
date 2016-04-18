@@ -17,6 +17,7 @@ class BestTutorsViewController: UIViewController,UITableViewDataSource,UITableVi
     let manager = CLLocationManager()
      var refreshControl: UIRefreshControl!
     var indexpath : NSIndexPath?
+    var indicator:ProgressIndicator?
     //The ratings powered tutor array
     var tutorbyratingObjects : [PFObject] = []
     //The location powered tutor array
@@ -25,6 +26,9 @@ class BestTutorsViewController: UIViewController,UITableViewDataSource,UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Tutors Available"
+        self.navigationController?.toolbar.hidden = false
+        indicator = ProgressIndicator(inview:self.view,loadingViewColor: UIColor.blueColor(), indicatorColor: UIColor.blackColor(), msg: "Fetching ze best tutors..")
+        self.view.addSubview(indicator!)
         self.navigationController?.setToolbarHidden(false, animated: true)
         var items: Array<UIBarButtonItem> = []
        
@@ -35,14 +39,14 @@ class BestTutorsViewController: UIViewController,UITableViewDataSource,UITableVi
         self.refreshControl.addTarget(self, action: #selector(refresh), forControlEvents: UIControlEvents.ValueChanged)
         self.myTableView.addSubview(self.refreshControl)
         self.setToolbarItems(items, animated: false)
+        indicator?.start()
         CheckInternet.checkInternet(false, completionHandler:
             {(internet:Bool) -> Void in
                 
                 if (internet)
                 {
                     
-                    let spinner: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0, 0, 150, 150)) as UIActivityIndicatorView
-                    spinner.startAnimating()
+                    
                     let query = PFUser.query()
                     query?.limit = 100
                     query?.orderByDescending("Rating")
@@ -64,6 +68,7 @@ class BestTutorsViewController: UIViewController,UITableViewDataSource,UITableVi
                                                     self.tutorbyratingObjects.append(tutor)
                                                 }
                                             }
+                                            self.indicator?.stop()
                                             self.myTableView.reloadData()
                                         }
                                         else
@@ -111,6 +116,9 @@ class BestTutorsViewController: UIViewController,UITableViewDataSource,UITableVi
             break
         }
         return returnValue
+    }
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.toolbarHidden = false;
     }
     internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
@@ -212,8 +220,23 @@ class BestTutorsViewController: UIViewController,UITableViewDataSource,UITableVi
    
     func refresh(sender:AnyObject)
     {
-        self.myTableView.reloadData()
-        self.refreshControl.endRefreshing()
+        CheckInternet.checkInternet(false, completionHandler:
+            {(internet:Bool) -> Void in
+                if (internet)
+                {
+                    self.myTableView.reloadData()
+                    self.refreshControl.endRefreshing()
+                }
+                else
+                {
+                    print("Internet does not exist")
+                    let alertz = UIAlertController(title: "Oops!", message:"No internet connection", preferredStyle: .Alert)
+                    alertz.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
+                    self.presentViewController(alertz, animated: true){}
+                }
+                })
+        
+                
     }
 
  
@@ -247,6 +270,7 @@ class BestTutorsViewController: UIViewController,UITableViewDataSource,UITableVi
                                 {
                                     
                                     self.tutorbystateObjects.append(object)
+                                    self.indicator?.stop()
                                 }
                             }
                         }

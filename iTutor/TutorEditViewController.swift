@@ -14,11 +14,16 @@ class TutorEditViewController: FormViewController
     let username:String? = nil
     let password:String? = nil
     var objectid:String?
+    var indicator:ProgressIndicator?
+  
+    
     var currentuser = PFUser.currentUser()
     var tutorGeoPoint = PFGeoPoint()
     var imagez:UIImage?
     override func viewDidLoad() {
         super.viewDidLoad()
+        indicator = ProgressIndicator(inview:self.view,loadingViewColor: UIColor.blueColor(), indicatorColor: UIColor.blackColor(), msg: "Editing your data,Please hold tight..")
+        self.view.addSubview(indicator!)
         self.title = "Tutor Edit"
         self.navigationController?.navigationBar.translucent = false
         self.navigationController?.toolbar.hidden = false
@@ -84,11 +89,7 @@ class TutorEditViewController: FormViewController
                             if(error == nil)
                             {
                                 let image = UIImage(data: imageData!)
-                                print("YOOWAHH")
-                                print(image)
-                                print("***********")
                                 self.imagez = image
-                                print(self.imagez)
                                 myvalue.value = image
                                 
                                
@@ -239,20 +240,86 @@ class TutorEditViewController: FormViewController
             }
         })
     }
-
+    func showAlert(title : String?,message : String?)
+    {
+        let alertz = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        alertz.addAction(UIAlertAction(title: "OK", style: .Default) { _ in})
+        self.presentViewController(alertz, animated: true){}
+    }
 
 
 
     func doneTapped()
     {
 
-        currentuser?.username = form.rowByTag("Emaillol")?.baseValue as? String
-        currentuser?.password = form.rowByTag("Passwordlol")?.baseValue as? String
-        currentuser?.setValue(form.rowByTag("name")?.baseValue as? AnyObject, forKey: "Name")
-        currentuser?.setValue(form.rowByTag("phone")?.baseValue as? AnyObject, forKey: "PhoneNo")
-        currentuser?.setValue(form.rowByTag("Gender")?.baseValue as? AnyObject, forKey: "Gender")
-        currentuser?.setValue(form.rowByTag("Price")?.baseValue as? AnyObject, forKey: "PricingRange")
-        currentuser?.setValue(form.rowByTag("Desc")?.baseValue as? AnyObject, forKey: "Desc")
+        if let usernamez = form.rowByTag("Emaillol")?.baseValue as? String
+        {
+            if(usernamez.characters.count < 5)
+            {
+                self.showAlert("Sorry!", message: "Email has to be more than 5 characters!")
+            }
+            else
+            {
+                currentuser?.username = usernamez
+            }
+            
+        }
+        else
+        {
+            self.showAlert("Error!", message: "Please enter your username!")
+        }
+        if let passwordz = form.rowByTag("Passwordlol")?.baseValue as? String
+        {
+            if(passwordz.characters.count < 5)
+            {
+                self.showAlert("Sorry!", message: "Password has to be more than 5 characters!")
+            }
+            else
+            {
+                currentuser?.password = passwordz
+            }
+
+        }
+        else
+        {
+            self.showAlert("Error!", message: "Please enter your password!")
+        }
+        if let name = form.rowByTag("name")?.baseValue as? AnyObject
+        {
+            currentuser?.setValue(name, forKey: "Name")
+        }
+        else
+        {
+            self.showAlert("Error!", message: "Please enter your name!")
+        }
+        if let phone = form.rowByTag("phone")?.baseValue as? AnyObject
+        {
+            currentuser?.setValue(phone, forKey: "PhoneNo")
+        }
+        else
+        {
+            self.showAlert("Error!", message: "Please enter your phone number!")
+        }
+        if let gender = form.rowByTag("Gender")?.baseValue as? AnyObject
+        {
+            currentuser?.setValue(gender, forKey: "Gender")
+        }
+        else
+        {
+            self.showAlert("Error!", message: "Please enter your gender!")
+        }
+        if let price = form.rowByTag("Price")?.baseValue as? AnyObject
+        {
+            currentuser?.setValue(price, forKey: "PricingRange")
+        }
+        else
+        {
+            self.showAlert("Error!", message: "Please enter your pricing range!")
+        }
+        if let desc = form.rowByTag("Desc")?.baseValue as? AnyObject
+        {
+            currentuser?.setValue(desc, forKey: "Desc")
+        }
         
         if let imagez = form.rowByTag("Image")?.baseValue as? UIImage
         {
@@ -260,37 +327,44 @@ class TutorEditViewController: FormViewController
             let profphoto = PFFile(name: "profile_photo", data: imageData)
             currentuser?.setValue(profphoto, forKey: "ProfPhoto")
         }
-        let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString((form.rowByTag("Town")?.baseValue as? String)!){
-            placemark, error in
-            if let error = error {
-                let alertz = UIAlertController(title: "Oops!", message:"\(error.localizedDescription)", preferredStyle: .Alert)
-                alertz.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
-                self.presentViewController(alertz, animated: true){}
-                return
-            }
-            if let  placemark = placemark{
-                if placemark.count > 0 {
-                    let placemark = placemark.first!
-                    let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
-                    self.tutorGeoPoint.latitude = coordinates.latitude
-                    self.tutorGeoPoint.longitude = coordinates.longitude
-                    print(self.tutorGeoPoint)
-                    
-                    self.currentuser?.setValue(self.tutorGeoPoint, forKey: "StateGeopoint")
-                    
-                }
-            }
-            
-            
-        }
+      
         if let state = form.rowByTag("State")?.baseValue as? AnyObject
         {
             currentuser?.setValue(state, forKey: "State")
         }
+        else
+        {
+            self.showAlert("Error!", message: "Please enter your state!")
+        }
         if let town = form.rowByTag("Town")?.baseValue as? AnyObject
         {
             currentuser?.setValue(town, forKey: "Town")
+            let geocoder = CLGeocoder()
+            geocoder.geocodeAddressString((form.rowByTag("Town")?.baseValue as? String)!){
+                placemark, error in
+                if let error = error {
+                    let alertz = UIAlertController(title: "Oops!", message:"\(error.localizedDescription)", preferredStyle: .Alert)
+                    alertz.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
+                    self.presentViewController(alertz, animated: true){}
+                    return
+                }
+                if let  placemark = placemark{
+                    if placemark.count > 0 {
+                        let placemark = placemark.first!
+                        let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
+                        self.tutorGeoPoint.latitude = coordinates.latitude
+                        self.tutorGeoPoint.longitude = coordinates.longitude
+                        print(self.tutorGeoPoint)
+                        
+                        self.currentuser?.setValue(self.tutorGeoPoint, forKey: "StateGeopoint")
+                        
+                    }
+                }
+            }
+        }
+        else
+        {
+            self.showAlert("Error!", message: "Please enter your town!")
         }
 
         //converting NSArray to a Swift Set
@@ -299,6 +373,10 @@ class TutorEditViewController: FormViewController
             let day = days.flatMap { $0 }
             currentuser?.setValue(day, forKey: "Days")
         }
+        else
+        {
+            self.showAlert("Error!", message: "Please enter your days!")
+        }
         if let subjects = form.rowByTag("Subjects")?.baseValue as? Set<String>
         {
             let sub = subjects.flatMap { $0 }
@@ -306,7 +384,8 @@ class TutorEditViewController: FormViewController
         }
         else
         {
-            print("Error,There is no subjects chosen")
+            self.showAlert("Error!", message: "Please enter your subject!")
+
         }
         if let levels = form.rowByTag("Levels")?.baseValue as? Set<String>
         {
@@ -315,28 +394,28 @@ class TutorEditViewController: FormViewController
         }
         else
         {
-            print("Error,There no levels chosen")
+            self.showAlert("Error!", message: "Please enter your level!")
         }
-        
-        currentuser?.saveInBackgroundWithBlock({ (succeed, error) -> Void in
-            
-          
-            if ((error) != nil) {
-                let alertz = UIAlertController(title: "Oops!", message:"\(error)", preferredStyle: .Alert)
-                alertz.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
-                self.presentViewController(alertz, animated: true){}
+        if(form.rowByTag("Emaillol")?.baseValue != nil && form.rowByTag("Passwordlol")?.baseValue != nil && form.rowByTag("name")?.baseValue != nil && form.rowByTag("phone")?.baseValue != nil && form.rowByTag("Gender")?.baseValue != nil && form.rowByTag("Price")?.baseValue != nil &&  form.rowByTag("State")?.baseValue != nil && form.rowByTag("Town")?.baseValue != nil && form.rowByTag("Day")?.baseValue != nil && form.rowByTag("Subjects")?.baseValue != nil && form.rowByTag("Levels")?.baseValue != nil)
+        {
+            indicator?.start()
+            currentuser?.saveInBackgroundWithBlock({ (succeed, error) -> Void in
                 
-            } else {
-                let alert = UIAlertController(title: "Yay!", message:"Edited the Data!", preferredStyle: .Alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in
-                    self.dismissViewControllerAnimated(true, completion: nil)})
-                self.presentViewController(alert, animated: true){}
-            }
-        })
-
-       
-        
-        
+                
+                if ((error) != nil) {
+                    let alertz = UIAlertController(title: "Oops!", message:"\(error)", preferredStyle: .Alert)
+                    alertz.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
+                    self.presentViewController(alertz, animated: true){}
+                    
+                } else {
+                    self.indicator?.stop()
+                    let alert = UIAlertController(title: "Yay!", message:"Edited the Data!", preferredStyle: .Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in
+                        self.dismissViewControllerAnimated(true, completion: nil)})
+                    self.presentViewController(alert, animated: true){}
+                }
+            })
+        }
         
     }
 }

@@ -15,7 +15,7 @@ import Bolts
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var tutors : [PersistedPFObject] = []
+    var persistedPFObjects = [NSManagedObject]()
     var tutorsFilePath : String {
         let manager = NSFileManager.defaultManager()
         let url = manager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first as NSURL!

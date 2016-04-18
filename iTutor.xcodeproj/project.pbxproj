@@ -37,6 +37,7 @@
 		226F23141C6A592E001F5D9B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226F23131C6A592E001F5D9B /* SystemConfiguration.framework */; };
 		226F23161C6A5937001F5D9B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 226F23151C6A5937001F5D9B /* libz.tbd */; };
 		226F23181C6A5944001F5D9B /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 226F23171C6A5944001F5D9B /* libsqlite3.tbd */; };
+		22934A091CC35C7A00686E7A /* ProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22934A081CC35C7A00686E7A /* ProgressIndicator.swift */; };
 		2295013B1C899E64006C6707 /* StudentQueryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2295013A1C899E64006C6707 /* StudentQueryViewController.swift */; };
 		2295013D1C8C6561006C6707 /* TutorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2295013C1C8C6561006C6707 /* TutorTableViewController.swift */; };
 		2295013F1C8EDFC8006C6707 /* TutorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2295013E1C8EDFC8006C6707 /* TutorTableViewCell.swift */; };
@@ -100,6 +101,7 @@
 		226F23131C6A592E001F5D9B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		226F23151C6A5937001F5D9B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		226F23171C6A5944001F5D9B /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		22934A081CC35C7A00686E7A /* ProgressIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressIndicator.swift; sourceTree = "<group>"; };
 		2295013A1C899E64006C6707 /* StudentQueryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentQueryViewController.swift; sourceTree = "<group>"; };
 		2295013C1C8C6561006C6707 /* TutorTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorTableViewController.swift; sourceTree = "<group>"; };
 		2295013E1C8EDFC8006C6707 /* TutorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorTableViewCell.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				226F22CE1C6A422C001F5D9B /* Main.storyboard */,
+				22934A081CC35C7A00686E7A /* ProgressIndicator.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 				22545B851CB8FB8200F6A143 /* BestTutorsTableViewCell.swift in Sources */,
 				22545B811CB1617E00F6A143 /* BestTutorsViewController.swift in Sources */,
 				226F22CB1C6A422C001F5D9B /* AppDelegate.swift in Sources */,
+				22934A091CC35C7A00686E7A /* ProgressIndicator.swift in Sources */,
 				22545B6F1CAD7FED00F6A143 /* TutorFavoritesViewController.swift in Sources */,
 				22545B691CAD7FAC00F6A143 /* PersistedPFObject.swift in Sources */,
 				22545B6D1CAD7FE000F6A143 /* SignUpViewController.swift in Sources */,

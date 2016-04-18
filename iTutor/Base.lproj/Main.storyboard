@@ -254,7 +254,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="knj-4p-goA">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="knj-4p-goA">
                                 <rect key="frame" x="0.0" y="20" width="600" height="980"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a7y-fW-eJr">
@@ -485,7 +485,7 @@
         <!--Navigation Controller-->
         <scene sceneID="PwT-iu-yLI">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" hidesBarsOnTap="YES" id="OxJ-Fh-jHA" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OxJ-Fh-jHA" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eKh-9U-qHy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -618,7 +618,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fpl-E7-BER" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1833" y="512"/>
+            <point key="canvasLocation" x="1719" y="608"/>
         </scene>
         <!--Tutor Edit-->
         <scene sceneID="svo-ya-Jnu">
@@ -711,7 +711,6 @@
         <!--Tutor Favorites View Controller-->
         <scene sceneID="ncj-3O-xNK">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kiK-yx-Bxy" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="yvC-Rg-w2w" customClass="TutorFavoritesViewController" customModule="iTutor" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" id="qvo-ro-olm">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
@@ -806,13 +805,14 @@
                         <segue destination="xY2-Zz-hTU" kind="show" identifier="favoritedetail" id="ksN-WH-QNf"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kiK-yx-Bxy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1853" y="-391"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="piX-wc-GsN"/>
-        <segue reference="ksN-WH-QNf"/>
+        <segue reference="pEd-Xv-Lzg"/>
+        <segue reference="IkY-YQ-lAg"/>
         <segue reference="ui6-ph-yY3"/>
     </inferredMetricsTieBreakers>
 </document>

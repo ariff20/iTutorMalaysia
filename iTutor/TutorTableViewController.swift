@@ -17,23 +17,27 @@ class TutorTableViewController: UITableViewController
     var Level : String?
     var Gender : String?
     var tutorobject : [PFObject] = []
+    var indicator:ProgressIndicator?
     let cellIdentifier = "tutorcell"
     var objectidtopass : String?
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.navigationController?.hidesBarsOnTap = false
+
         self.title = "Tutors Available"
+        indicator = ProgressIndicator(inview:self.view,loadingViewColor: UIColor.blueColor(), indicatorColor: UIColor.blackColor(), msg: "Fetching your preferred tutors..")
+        self.view.addSubview(indicator!)
         CheckInternet.checkInternet(false, completionHandler:
             {(internet:Bool) -> Void in
                 
                 if (internet)
                 {
-                    let spinner: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0, 0, 150, 150)) as UIActivityIndicatorView
-                    spinner.startAnimating()
+                    self.indicator?.start()
+                    
                     if(self.Email != nil)
                     {
-                      
-                        if(self.State == nil && self.Level == nil && self.Subject == nil && self.Gender == nil)
+                      if(self.State == nil && self.Level == nil && self.Subject == nil && self.Gender == nil)
                         {
                                     let query = PFUser.query()
                                     query?.whereKey("username", equalTo: self.Email!)
@@ -56,6 +60,7 @@ class TutorTableViewController: UITableViewController
                                                         self.tutorobject.append(tutor)
                                                     }
                                                 }
+                                                self.indicator?.stop()
                                                 self.tableView.reloadData()
                                             }
                                             else
@@ -93,6 +98,7 @@ class TutorTableViewController: UITableViewController
                                                 self.tutorobject.append(tutor)
                                             }
                                         }
+                                        self.indicator?.stop()
                                         self.tableView.reloadData()
                                     }
                                     else
@@ -129,6 +135,7 @@ class TutorTableViewController: UITableViewController
                                                 self.tutorobject.append(tutor)
                                             }
                                         }
+                                        self.indicator?.stop()
                                         self.tableView.reloadData()
                                     }
                                     else
@@ -166,6 +173,7 @@ class TutorTableViewController: UITableViewController
                                                 self.tutorobject.append(tutor)
                                             }
                                         }
+                                        self.indicator?.stop()
                                         self.tableView.reloadData()
                                     }
                                     else
@@ -202,6 +210,7 @@ class TutorTableViewController: UITableViewController
                                                 self.tutorobject.append(tutor)
                                             }
                                         }
+                                        self.indicator?.stop()
                                         self.tableView.reloadData()
                                     }
                                     else
@@ -240,6 +249,7 @@ class TutorTableViewController: UITableViewController
                                                 self.tutorobject.append(tutor)
                                             }
                                         }
+                                        self.indicator?.stop()
                                         self.tableView.reloadData()
                                     }
                                     else
@@ -252,9 +262,7 @@ class TutorTableViewController: UITableViewController
                             }
                         }
                     }
-                
-                
-                    if(self.Subject != nil)
+                     if(self.Subject != nil)
                     {
                         if(self.State == nil && self.Level == nil && self.Gender == nil && self.Email == nil)
                         {
@@ -279,6 +287,7 @@ class TutorTableViewController: UITableViewController
                                                 self.tutorobject.append(tutor)
                                             }
                                         }
+                                        self.indicator?.stop()
                                         self.tableView.reloadData()
                                     }
                                     else
@@ -291,8 +300,6 @@ class TutorTableViewController: UITableViewController
                             }
                         }
                     }
-                    
-                
                     if(self.State != nil)
                     {
                         let query = PFUser.query()
@@ -316,6 +323,7 @@ class TutorTableViewController: UITableViewController
                                             self.tutorobject.append(tutor)
                                         }
                                     }
+                                    self.indicator?.stop()
                                     self.tableView.reloadData()
                                 }
                                 else
@@ -364,6 +372,7 @@ class TutorTableViewController: UITableViewController
                                                     self.tutorobject.append(tutor)
                                                 }
                                             }
+                                            self.indicator?.stop()
                                             self.tableView.reloadData()
                                         }
                                         else

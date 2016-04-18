@@ -147,7 +147,6 @@ class SignUpViewController: FormViewController
         navigationController?.popViewControllerAnimated(true)
     }
     
-        // Do any additional setup after loading the view.
     func showAlert(title : String?,message : String?)
     {
         let alertz = UIAlertController(title: title, message: message, preferredStyle: .Alert)
@@ -204,7 +203,7 @@ func doneTapped()
     }
     else
     {
-        self.showAlert("Error!", message: "Please enter your phonenumber!")
+        self.showAlert("Error!", message: "Please enter your phone number!")
     }
     if let gender = form.rowByTag("Gender")?.baseValue as? AnyObject
     {
@@ -290,7 +289,6 @@ func doneTapped()
     {
         let sub = subjects.flatMap { $0 }
         user["Subjects"] = sub as AnyObject
-        
     }
     else
     {

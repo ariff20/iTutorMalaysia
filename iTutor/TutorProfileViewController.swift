@@ -11,10 +11,10 @@ import Parse
 import MessageUI
 import Material
 import Cosmos
+import CoreData
 class TutorProfileViewController: UIViewController,MFMailComposeViewControllerDelegate {
     
     @IBOutlet var tutsubjects: UILabel!
-
     @IBOutlet var tutname: UILabel!
     @IBOutlet var tutimage: UIImageView!
     @IBOutlet var tutgender: UILabel!
@@ -25,6 +25,7 @@ class TutorProfileViewController: UIViewController,MFMailComposeViewControllerDe
     @IBOutlet var tutdays: UILabel!
     @IBOutlet var tutlevels: UILabel!
     @IBOutlet var scrollView: UIScrollView!
+    var indicator:ProgressIndicator?
     //The variable for input
     @IBOutlet var ratinginput: CosmosView!
     //The variable for displaying the rating
@@ -51,15 +52,18 @@ class TutorProfileViewController: UIViewController,MFMailComposeViewControllerDe
     //An array to save the tutors that have been rated by the student(device)
     var studenttutors : [String] = []
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    
     //Array of persisted pfobjects
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.toolbar.hidden = true
+       
+        indicator = ProgressIndicator(inview:self.view,loadingViewColor: UIColor.blueColor(), indicatorColor: UIColor.blackColor(), msg: "Fetching ze tutor..")
+        self.view.addSubview(indicator!)
+        indicator?.start()
         prepareMenuViewExample()
         ratinginput.hidden = true
         ratinginput.didFinishTouchingCosmos = didFinishTouchingCosmos
     
-        self.navigationController?.toolbarHidden = true
         CheckInternet.checkInternet(false, completionHandler:
             {(internet:Bool) -> Void in
                 
@@ -110,6 +114,7 @@ class TutorProfileViewController: UIViewController,MFMailComposeViewControllerDe
                                         }
                                     })
                                 }
+                                self.indicator?.stop()
                             } else {
                                 print(error)
                             }
@@ -136,8 +141,10 @@ class TutorProfileViewController: UIViewController,MFMailComposeViewControllerDe
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.toolbarHidden = true
+    }
     
-   
     @IBAction func ratinginputTapped(sender: AnyObject)
     {
         if(ratinginput.hidden == true)
@@ -339,45 +346,77 @@ class TutorProfileViewController: UIViewController,MFMailComposeViewControllerDe
 
     func addtoFavorites(sender: AnyObject)
     {
+      
            //Unwrap the objectID
             if let objectfavorite = self.tutor?.objectId
             {
+                
+                
                 let queri = PFUser.query()
                 queri!.getObjectInBackgroundWithId(objectfavorite) {
                     (tutorobject: PFObject?, error: NSError?) -> Void in
                     if error == nil && tutorobject != nil
                     {
-                        //Create PersistedPFObject instance
-                        let persist = PersistedPFObject(objectID: objectfavorite, name: tutorobject!["Name"] as! String, phoneNo: tutorobject!["PhoneNo"] as! String
-                            , state: tutorobject!["State"] as! String
-, town: tutorobject!["Town"] as! String, gender: tutorobject!["Gender"] as! String)
+                        
+                        let managedContext = self.appDelegate.managedObjectContext
+                        let request = NSFetchRequest(entityName: "PFObjectEntity")
+                        request.returnsObjectsAsFaults = false
+                        do
+                        {
+                            let results = try managedContext.executeFetchRequest(request)
+                            if(results.count > 0)
+                            {
+                                for tutor in results
+                                {
+                                    if(tutor.objectid == objectfavorite)
+                                    {
+                                        let alerta = UIAlertController(title: "Oops!", message:"Tutor already added to favorites!", preferredStyle: .Alert)
+                                        alerta.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
+                                        self.presentViewController(alerta, animated: true){}
+                                    }
+                                    else
+                                    {
+                                        let ent = NSEntityDescription.entityForName("PFObjectEntity", inManagedObjectContext: managedContext)
+                                        let newfavorite = PersistedPFObject(entity: ent! , insertIntoManagedObjectContext: managedContext)
+                                        newfavorite.name = tutorobject!["Name"] as! String
+                                        newfavorite.gender = tutorobject!["Gender"] as! String
+                                        newfavorite.objectid = objectfavorite
+                                        newfavorite.phoneNo = tutorobject!["PhoneNo"] as! String
+                                        newfavorite.state = tutorobject!["State"] as! String
+                                        newfavorite.town =  tutorobject!["Town"] as! String
+                                        
+                                        do
+                                        {
+                                            try managedContext.save()
+                                            let alerta = UIAlertController(title: "Great!", message:"Added to favorites!", preferredStyle: .Alert)
+                                            alerta.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
+                                            self.presentViewController(alerta, animated: true){}
+                                            
+                                        }
+                                        catch
+                                        {
+                                            print("Error with saving the managedContext..")
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                print("No results found")
+                            }
+                        }
+                        catch
+                        {
+                            print("Error with fetching the favorites.")
+                        }
                        
-                        //Append it to the array
-                        
-                        self.appDelegate.tutors.append(persist)
-                        
-                        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-                        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-                        dispatch_async(backgroundQueue, {
-                            
-                            print("This is running on the background queue")
-                            
-                            NSKeyedArchiver.archiveRootObject(self.appDelegate.tutors, toFile:self.appDelegate.tutorsFilePath)
-                            let alertz = UIAlertController(title: "Great!", message:"Added to favorites!", preferredStyle: .Alert)
-                            alertz.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
-                            self.presentViewController(alertz, animated: true){}
-                            
-                        })
-                        
                     }
                     else
                     {
-                        print("Error with PFQuery ")
+                        print("Error with PFQuery..")
                     }
-                    
                 }
-                
         }
-    }
 
+}
 }
