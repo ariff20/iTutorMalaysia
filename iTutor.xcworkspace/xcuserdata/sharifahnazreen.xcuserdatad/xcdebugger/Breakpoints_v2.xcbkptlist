@@ -88,7 +88,7 @@
                   moduleName = "iTutor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sharifahnazreen/Desktop/iTutor/iTutor/TutorProfileViewController.swift"
-                  timestampString = "482648421.41431"
+                  timestampString = "482681276.207961"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -103,7 +103,7 @@
                   moduleName = "iTutor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sharifahnazreen/Desktop/iTutor/iTutor/TutorProfileViewController.swift"
-                  timestampString = "482648421.414471"
+                  timestampString = "482681276.208205"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "17"
@@ -118,7 +118,7 @@
                   moduleName = "iTutor"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sharifahnazreen/Desktop/iTutor/iTutor/TutorProfileViewController.swift"
-                  timestampString = "482648421.414603"
+                  timestampString = "482681276.208385"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "17"
@@ -215,43 +215,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iTutor/TutorProfileViewController.swift"
-            timestampString = "482654797.566681"
+            timestampString = "482680055.561309"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "359"
-            endingLineNumber = "359"
-            landmarkName = "addtoFavorites(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "iTutor/TutorProfileViewController.swift"
-            timestampString = "482654797.566681"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "359"
-            endingLineNumber = "359"
-            landmarkName = "addtoFavorites(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "iTutor/TutorProfileViewController.swift"
-            timestampString = "482654797.566681"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "303"
-            endingLineNumber = "303"
+            startingLineNumber = "300"
+            endingLineNumber = "300"
             landmarkName = "didFinishTouchingCosmos(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -279,13 +247,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iTutor/SignUpViewController.swift"
-            timestampString = "482515807.180359"
+            timestampString = "482678558.220127"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iTutor/TutorProfileViewController.swift"
+            timestampString = "482724307.132188"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "447"
+            endingLineNumber = "447">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

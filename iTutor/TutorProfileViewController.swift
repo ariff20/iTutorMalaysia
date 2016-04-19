@@ -157,7 +157,6 @@ class TutorProfileViewController: UIViewController,MFMailComposeViewControllerDe
                     if let objects = studentobjects {
                         for object in objects {
                             let tutsratedunderonestudent : NSArray = object.valueForKey("Tutors") as! NSArray
-                            print(self.uuidz)
                             if(tutsratedunderonestudent.containsObject((self.tutor?.objectId)!))
                             {
                                 let alertz = UIAlertController(title: "Oops!", message:"You have already rated this tutor!", preferredStyle: .Alert)
@@ -240,7 +239,6 @@ class TutorProfileViewController: UIViewController,MFMailComposeViewControllerDe
     }
     private func prepareMenuViewExample() {
         var image: UIImage? = UIImage(named: "plus")
-        print(image)
         let btn1: FabButton = FabButton()
         btn1.setImage(image, forState: .Normal)
         btn1.setImage(image, forState: .Highlighted)
@@ -248,7 +246,6 @@ class TutorProfileViewController: UIViewController,MFMailComposeViewControllerDe
         menuView.addSubview(btn1)
         
         image = UIImage(named: "phone")
-        print(image)
         let btn2: FabButton = FabButton()
         btn2.setImage(image, forState: .Normal)
         btn2.setImage(image, forState: .Highlighted)
@@ -346,77 +343,104 @@ class TutorProfileViewController: UIViewController,MFMailComposeViewControllerDe
 
     func addtoFavorites(sender: AnyObject)
     {
-      
-           //Unwrap the objectID
-            if let objectfavorite = self.tutor?.objectId
-            {
-                
-                
-                let queri = PFUser.query()
-                queri!.getObjectInBackgroundWithId(objectfavorite) {
-                    (tutorobject: PFObject?, error: NSError?) -> Void in
-                    if error == nil && tutorobject != nil
+        
+        //Unwrap the objectID
+        if let objectfavorite = self.tutor?.objectId
+        {
+            
+            
+            let queri = PFUser.query()
+            queri!.getObjectInBackgroundWithId(objectfavorite) {
+                (tutorobject: PFObject?, error: NSError?) -> Void in
+                if error == nil && tutorobject != nil
+                {
+                    
+                    let managedContext = self.appDelegate.managedObjectContext
+                    let request = NSFetchRequest(entityName: "PFObjectEntity")
+                    request.returnsObjectsAsFaults = false
+                    do
                     {
-                        
-                        let managedContext = self.appDelegate.managedObjectContext
-                        let request = NSFetchRequest(entityName: "PFObjectEntity")
-                        request.returnsObjectsAsFaults = false
-                        do
+                        let results = try managedContext.executeFetchRequest(request)
+                        if (results.count == 0)
                         {
-                            let results = try managedContext.executeFetchRequest(request)
-                            if(results.count > 0)
+                            let ent1 = NSEntityDescription.entityForName("PFObjectEntity", inManagedObjectContext: managedContext)
+                            let newfavorite1 = PersistedPFObject(entity: ent1! , insertIntoManagedObjectContext: managedContext)
+                            newfavorite1.name = tutorobject!["Name"] as! String
+                            newfavorite1.gender = tutorobject!["Gender"] as! String
+                            newfavorite1.objectid = objectfavorite
+                            newfavorite1.phoneNo = tutorobject!["PhoneNo"] as! String
+                            newfavorite1.state = tutorobject!["State"] as! String
+                            newfavorite1.town =  tutorobject!["Town"] as! String
+                            
+                            do
                             {
-                                for tutor in results
+                                try managedContext.save()
+                                let alerta = UIAlertController(title: "Great!", message:"Added to favorites!", preferredStyle: .Alert)
+                                alerta.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
+                                self.presentViewController(alerta, animated: true){}
+                                
+                            }
+                            catch
+                            {
+                                print("Error with saving the managedContext..")
+                            }
+                        }
+                       else if(results.count > 0)
+                        {
+                            var added : Bool = false;
+                            for tutor in results
+                            {
+                                if(tutor.objectid == objectfavorite)
                                 {
-                                    if(tutor.objectid == objectfavorite)
-                                    {
-                                        let alerta = UIAlertController(title: "Oops!", message:"Tutor already added to favorites!", preferredStyle: .Alert)
-                                        alerta.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
-                                        self.presentViewController(alerta, animated: true){}
-                                    }
-                                    else
-                                    {
-                                        let ent = NSEntityDescription.entityForName("PFObjectEntity", inManagedObjectContext: managedContext)
-                                        let newfavorite = PersistedPFObject(entity: ent! , insertIntoManagedObjectContext: managedContext)
-                                        newfavorite.name = tutorobject!["Name"] as! String
-                                        newfavorite.gender = tutorobject!["Gender"] as! String
-                                        newfavorite.objectid = objectfavorite
-                                        newfavorite.phoneNo = tutorobject!["PhoneNo"] as! String
-                                        newfavorite.state = tutorobject!["State"] as! String
-                                        newfavorite.town =  tutorobject!["Town"] as! String
-                                        
-                                        do
-                                        {
-                                            try managedContext.save()
-                                            let alerta = UIAlertController(title: "Great!", message:"Added to favorites!", preferredStyle: .Alert)
-                                            alerta.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
-                                            self.presentViewController(alerta, animated: true){}
-                                            
-                                        }
-                                        catch
-                                        {
-                                            print("Error with saving the managedContext..")
-                                        }
-                                    }
+                                    let alerta = UIAlertController(title: "Oops!", message:"Tutor already added to favorites!", preferredStyle: .Alert)
+                                    alerta.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
+                                    self.presentViewController(alerta, animated: true){}
+                                    added = true;
+                                }
+                                
+                            }
+                            if (!added)
+                            {
+                                let ent = NSEntityDescription.entityForName("PFObjectEntity", inManagedObjectContext: managedContext)
+                                let newfavorite = PersistedPFObject(entity: ent! , insertIntoManagedObjectContext: managedContext)
+                                newfavorite.name = tutorobject!["Name"] as! String
+                                newfavorite.gender = tutorobject!["Gender"] as! String
+                                newfavorite.objectid = objectfavorite
+                                newfavorite.phoneNo = tutorobject!["PhoneNo"] as! String
+                                newfavorite.state = tutorobject!["State"] as! String
+                                newfavorite.town =  tutorobject!["Town"] as! String
+                                
+                                do
+                                {
+                                    try managedContext.save()
+                                    let alerta = UIAlertController(title: "Great!", message:"Added to favorites!", preferredStyle: .Alert)
+                                    alerta.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
+                                    self.presentViewController(alerta, animated: true){}
+                                    
+                                }
+                                catch
+                                {
+                                    print("Error with saving the managedContext..")
                                 }
                             }
-                            else
-                            {
-                                print("No results found")
-                            }
                         }
-                        catch
+                        else
                         {
-                            print("Error with fetching the favorites.")
+                            print("No results found")
                         }
-                       
                     }
-                    else
+                    catch
                     {
-                        print("Error with PFQuery..")
+                        print("Error with fetching the favorites.")
                     }
+                    
                 }
+                else
+                {
+                    print("Error with PFQuery..")
+                }
+            }
         }
-
-}
+        
+    }
 }

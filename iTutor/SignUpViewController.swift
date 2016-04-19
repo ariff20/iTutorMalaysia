@@ -14,9 +14,11 @@ class SignUpViewController: FormViewController
     let username:String? = nil
     let password:String? = nil
     var tutorGeoPointz = PFGeoPoint()
+    var indicator:ProgressIndicator?
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        indicator = ProgressIndicator(inview:self.view,loadingViewColor: UIColor.blueColor(), indicatorColor: UIColor.blackColor(), msg: "Signing Up,Please hold tight..")
+        self.view.addSubview(indicator!)
        self.navigationController?.navigationBar.translucent = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .Done, target: self, action: #selector(doneTapped))
          navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: #selector(cancelTapped))
@@ -306,6 +308,7 @@ func doneTapped()
     
     if(form.rowByTag("Emaillol")?.baseValue != nil && form.rowByTag("Passwordlol")?.baseValue != nil && form.rowByTag("name")?.baseValue != nil && form.rowByTag("phone")?.baseValue != nil && form.rowByTag("Gender")?.baseValue != nil && form.rowByTag("Price")?.baseValue != nil &&  form.rowByTag("State")?.baseValue != nil && form.rowByTag("Town")?.baseValue != nil && form.rowByTag("Day")?.baseValue != nil && form.rowByTag("Subjects")?.baseValue != nil && form.rowByTag("Levels")?.baseValue != nil)
         {
+            indicator?.start()
             user.signUpInBackgroundWithBlock({ (succeed, error) -> Void in
                 
                 
@@ -313,6 +316,7 @@ func doneTapped()
                     self.showAlert("Oops", message: error?.localizedDescription)
                     
                 } else {
+                    self.indicator?.stop()
                     let alertz = UIAlertController(title: "Yay", message: "Signed Up!", preferredStyle: .Alert)
                     alertz.addAction(UIAlertAction(title: "OK", style: .Default) { _ in
                         self.dismissViewControllerAnimated(true, completion: nil)})

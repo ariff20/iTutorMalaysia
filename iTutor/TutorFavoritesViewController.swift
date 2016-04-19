@@ -33,7 +33,6 @@ class TutorFavoritesViewController:UITableViewController
             if(results.count > 0)
             {
                print("\(results.count) found!")
-                print(results)
                favoritetutors = results
             }
             else
